@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#102d2b" />
+    <meta name="description" content="CNT 远端工具总览：光学、TEM、BET 与生产数据分析服务" />
+    <title>CNT Lab · 远端工具总览</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header shell">
+      <a class="brand" href="#top">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>CNT LAB</strong><small>REMOTE TOOLBOX</small></span>
+      </a>
+      <div class="header-status"><i></i><span id="serviceSummary">正在检查远端服务</span></div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow">CARBON NANOTUBE · DIGITAL WORKBENCH</p>
+          <h1>一处入口，连接<br><em>从图像到工艺</em>的 CNT 工具。</h1>
+          <p class="lede">集中访问光学显微镜、TEM、BET / 电阻率预测和生产数据分析服务。每项工具保持独立运行，入口页只负责导航与状态展示。</p>
+          <div class="hero-meta">
+            <div><strong id="onlineCount">—</strong><span>在线服务</span></div>
+            <div><strong>4</strong><span>专业工具</span></div>
+            <div><strong>HTTPS</strong><span>加密访问</span></div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit orbit-one"><span>OPT</span></div>
+          <div class="orbit orbit-two"><span>TEM</span></div>
+          <div class="orbit orbit-three"><span>BET</span></div>
+          <div class="core"><i></i><i></i><i></i><i></i><b>CNT</b></div>
+          <div class="data-label label-a">MICROGRAPH</div>
+          <div class="data-label label-b">PROCESS</div>
+          <div class="data-label label-c">PREDICTION</div>
+        </div>
+      </section>
+
+      <section class="tools-section shell">
+        <header class="section-heading">
+          <div><p class="eyebrow">AVAILABLE WORKSPACES</p><h2>远端工具</h2></div>
+          <p>按任务选择入口。图像工具、模型工具和生产工作台之间的数据不会自动互通。</p>
+        </header>
+
+        <div class="tool-grid">
+          <article class="tool-card featured" data-service="opt">
+            <div class="card-top"><span class="tool-index">01</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="tool-symbol optical-symbol"><i></i><i></i><i></i><i></i></div>
+            <p class="tool-type">OPTICAL MICROGRAPH</p>
+            <h3>OptCNT 光学图像分析</h3>
+            <p class="tool-description">光学显微镜 CNT 单图快速分割、形态统计、空间均匀性和 base / 实验组对比。</p>
+            <div class="tag-row"><span>本地处理</span><span>单图分析</span><span>组间对比</span></div>
+            <a class="tool-link" href="./optcnt/" data-tool-link><span>打开分析台</span><b>↗</b></a>
+          </article>
+
+          <article class="tool-card" data-service="tem">
+            <div class="card-top"><span class="tool-index">02</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="tool-symbol tem-symbol"><span></span><span></span><span></span></div>
+            <p class="tool-type">TEM IMAGE ANALYSIS</p>
+            <h3>TEM CNT Analyzer</h3>
+            <p class="tool-description">TEM 图像结构识别与 ONNX 分析服务，适合纳米尺度的 CNT 图像处理与结果复核。</p>
+            <div class="tag-row"><span>TEM 图像</span><span>结构识别</span><span>在线 API</span></div>
+            <a class="tool-link" href="https://tem-cnt.47.236.76.214.nip.io/" data-tool-link><span>打开分析台</span><b>↗</b></a>
+          </article>
+
+          <article class="tool-card" data-service="bet">
+            <div class="card-top"><span class="tool-index">03</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="tool-symbol bet-symbol"><span></span><span></span><span></span><span></span><span></span></div>
+            <p class="tool-type">PROPERTY PREDICTION</p>
+            <h3>CNT‑BET 预测工作台</h3>
+            <p class="tool-description">BET、粉末电阻率、批量预测与反向设计，支持 MWCNT / SWCNT 结构或工艺模型。</p>
+            <div class="tag-row"><span>BET</span><span>电阻率</span><span>反向设计</span></div>
+            <a class="tool-link" href="https://47.236.76.214.nip.io/" data-tool-link><span>打开预测台</span><b>↗</b></a>
+          </article>
+
+          <article class="tool-card protected" data-service="production">
+            <div class="card-top"><span class="tool-index">04</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="tool-symbol production-symbol"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="tool-type">PRODUCTION INTELLIGENCE</p>
+            <h3>CNT 生产数据分析</h3>
+            <p class="tool-description">厂内生产数据版本、质量门禁、炉号排名、异常诊断与报表闭环。需要授权账号。</p>
+            <div class="tag-row"><span>登录保护</span><span>生产 KPI</span><span>质量门禁</span></div>
+            <a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/" data-tool-link><span>打开工作台</span><b>↗</b></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="workflow-section">
+        <div class="shell workflow-inner">
+          <div class="workflow-copy"><p class="eyebrow">WORKFLOW MAP</p><h2>各司其职，形成材料数据闭环</h2><p>图像结构、材料性质与生产过程分别由对应工具负责；需要正式结论时，应保留原始图像、参数快照、模型版本与导出报告。</p></div>
+          <div class="workflow-flow">
+            <article><span>IMAGE</span><strong>OPT / TEM</strong><small>结构与分布</small></article>
+            <i>→</i>
+            <article><span>PROPERTY</span><strong>BET / ρ</strong><small>性质预测</small></article>
+            <i>→</i>
+            <article><span>PROCESS</span><strong>PRODUCTION</strong><small>生产决策</small></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer shell"><span>CNT LAB REMOTE TOOLBOX</span><span>远端入口只做导航，不存储跨工具数据</span></footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>

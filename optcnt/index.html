@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0d2f2d" />
+    <meta
+      name="description"
+      content="OptCNT 光学显微镜 CNT 图像浏览器快速分析与组间对比工作台"
+    />
+    <title>OptCNT · 光学图像分析台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
+
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="主导航">
+        <a class="brand" href="#single" aria-label="OptCNT 首页">
+          <span class="brand-mark" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+          </span>
+          <span class="brand-copy">
+            <strong>OptCNT</strong>
+            <small>OPTICAL ANALYSIS</small>
+          </span>
+        </a>
+
+        <nav class="primary-nav">
+          <button class="nav-item active" type="button" data-page="single">
+            <span class="nav-icon" aria-hidden="true">◫</span>
+            <span><b>单图分析</b><small>IMAGE ANALYSIS</small></span>
+          </button>
+          <button class="nav-item" type="button" data-page="compare">
+            <span class="nav-icon" aria-hidden="true">⇄</span>
+            <span><b>组间对比</b><small>GROUP COMPARE</small></span>
+          </button>
+          <button class="nav-item" type="button" data-page="method">
+            <span class="nav-icon" aria-hidden="true">⌁</span>
+            <span><b>方法说明</b><small>METHODOLOGY</small></span>
+          </button>
+        </nav>
+
+        <div class="sidebar-note">
+          <span class="privacy-dot" aria-hidden="true"></span>
+          <div>
+            <strong>本地隐私模式</strong>
+            <small>图片不会上传服务器</small>
+          </div>
+        </div>
+
+        <footer class="sidebar-footer">
+          <span>WEB PREVIEW</span>
+          <b>v1.0</b>
+        </footer>
+      </aside>
+
+      <main id="mainContent" class="main-content">
+        <header class="topbar">
+          <div class="mobile-brand">
+            <span class="mobile-brand-mark" aria-hidden="true"></span>
+            <strong>OptCNT</strong>
+          </div>
+          <div class="breadcrumb">
+            <span>光学显微镜分析</span>
+            <i>/</i>
+            <strong id="currentSection">单图分析</strong>
+          </div>
+          <div class="topbar-actions">
+            <a class="portal-link" href="../">工具总览 <span>↗</span></a>
+            <span class="engine-status"><i></i>浏览器引擎就绪</span>
+            <button id="helpButton" class="icon-button" type="button" aria-label="查看方法说明">?</button>
+          </div>
+        </header>
+
+        <section id="page-single" class="page active" data-page-panel="single">
+          <header class="page-heading">
+            <div>
+              <p class="eyebrow">OPTICAL MICROGRAPH · LOCAL PIPELINE</p>
+              <h1>看清每一根 CNT，<em>也看懂整体分布。</em></h1>
+              <p class="page-lead">上传光学显微镜图像，在浏览器内完成快速分割、形态统计与空间均匀性预览。</p>
+            </div>
+            <div class="privacy-chip"><span>●</span> 原图仅在本机内存处理</div>
+          </header>
+
+          <div class="analysis-layout">
+            <aside class="control-column">
+              <section class="panel upload-panel">
+                <div class="panel-heading">
+                  <div><span class="step-index">01</span><h2>导入图像</h2></div>
+                  <small>JPG · PNG · TIFF*</small>
+                </div>
+
+                <label id="dropZone" class="drop-zone" for="imageInput">
+                  <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/bmp,image/tiff,.tif,.tiff" />
+                  <span class="upload-symbol" aria-hidden="true">＋</span>
+                  <strong>拖入或选择显微镜图像</strong>
+                  <small>建议单张不超过 25 MB</small>
+                </label>
+
+                <div id="fileSummary" class="file-summary hidden">
+                  <div class="file-thumb"><canvas id="thumbCanvas" width="72" height="54"></canvas></div>
+                  <div><strong id="fileName">—</strong><small id="fileMeta">—</small></div>
+                  <button id="clearImage" type="button" aria-label="移除当前图像">×</button>
+                </div>
+              </section>
+
+              <section class="panel parameter-panel">
+                <div class="panel-heading">
+                  <div><span class="step-index">02</span><h2>分析参数</h2></div>
+                  <button id="resetParams" class="text-button" type="button">恢复默认</button>
+                </div>
+
+                <div class="field-group">
+                  <label for="analysisScope">分析范围</label>
+                  <select id="analysisScope">
+                    <option value="center75">图像中部 75%</option>
+                    <option value="full">完整图像</option>
+                    <option value="center50">图像中部 50%</option>
+                  </select>
+                  <p>中部范围可降低边缘标尺与文字干扰。</p>
+                </div>
+
+                <div class="calibration-grid">
+                  <div class="field-group">
+                    <label for="scaleUm">标尺长度</label>
+                    <div class="input-unit"><input id="scaleUm" type="number" min="0.1" max="1000" step="0.1" value="10" /><span>μm</span></div>
+                  </div>
+                  <div class="field-group">
+                    <label for="scalePixels">标尺像素</label>
+                    <div class="input-unit"><input id="scalePixels" type="number" min="1" max="10000" step="1" value="100" /><span>px</span></div>
+                  </div>
+                </div>
+
+                <details class="advanced-settings">
+                  <summary>高级识别参数 <span>展开</span></summary>
+                  <div class="range-field">
+                    <div><label for="sensitivity">识别灵敏度</label><output id="sensitivityValue">52</output></div>
+                    <input id="sensitivity" type="range" min="20" max="85" value="52" />
+                  </div>
+                  <div class="range-field">
+                    <div><label for="minArea">最小连通面积</label><output id="minAreaValue">12 px²</output></div>
+                    <input id="minArea" type="range" min="4" max="80" value="12" />
+                  </div>
+                  <div class="range-field">
+                    <div><label for="minSlenderness">最小细长度</label><output id="minSlendernessValue">2.0</output></div>
+                    <input id="minSlenderness" type="range" min="10" max="60" value="20" />
+                  </div>
+                  <label class="toggle-row">
+                    <span><b>暗目标模式</b><small>适用于浅色背景上的深色 CNT</small></span>
+                    <input id="darkTarget" type="checkbox" checked />
+                    <i aria-hidden="true"></i>
+                  </label>
+                </details>
+
+                <button id="analyzeButton" class="primary-button" type="button" disabled>
+                  <span>开始快速分析</span><i aria-hidden="true">→</i>
+                </button>
+              </section>
+            </aside>
+
+            <section class="viewer-column">
+              <section class="panel viewer-panel">
+                <header class="viewer-toolbar">
+                  <div class="view-tabs" role="tablist" aria-label="图像视图">
+                    <button class="active" type="button" data-view="overlay">检测结果</button>
+                    <button type="button" data-view="original">原始图像</button>
+                    <button type="button" data-view="binary">二值预览</button>
+                  </div>
+                  <div class="viewer-actions">
+                    <span id="zoomLabel">100%</span>
+                    <button id="fitView" type="button" aria-label="适应窗口">适应</button>
+                    <button id="downloadOverlay" type="button" aria-label="下载检测结果" disabled>下载</button>
+                  </div>
+                </header>
+
+                <div id="canvasStage" class="canvas-stage empty">
+                  <div id="emptyState" class="empty-state">
+                    <span class="empty-orbit" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <strong>等待显微镜图像</strong>
+                    <p>导入后可在此切换原图、二值结果与 CNT 标注层。</p>
+                  </div>
+                  <div id="processingState" class="processing-state hidden" role="status">
+                    <span class="scanner" aria-hidden="true"></span>
+                    <strong id="processingTitle">正在解析光学结构</strong>
+                    <p id="processingDetail">构建自适应阈值与空间网格…</p>
+                  </div>
+                  <canvas id="imageCanvas" aria-label="显微镜图像分析画布"></canvas>
+                  <div id="canvasLegend" class="canvas-legend hidden">
+                    <span><i class="legend-dispersed"></i>分散候选</span>
+                    <span><i class="legend-agglomerated"></i>团聚候选</span>
+                    <span><i class="legend-roi"></i>分析范围</span>
+                  </div>
+                </div>
+
+                <footer class="viewer-footer">
+                  <span id="imageDimensions">尚未载入图像</span>
+                  <span class="mode-badge">BROWSER QUICK MODE</span>
+                </footer>
+              </section>
+
+              <div class="chart-grid">
+                <section class="panel chart-panel">
+                  <header><div><p>长度分布</p><h2>CNT 候选长度直方图</h2></div><span id="histogramMeta">—</span></header>
+                  <div class="chart-canvas-wrap"><canvas id="histogramCanvas"></canvas></div>
+                </section>
+                <section class="panel chart-panel">
+                  <header><div><p>空间分布</p><h2>网格密度热图</h2></div><span id="heatmapMeta">5 × 5</span></header>
+                  <div class="chart-canvas-wrap"><canvas id="heatmapCanvas"></canvas></div>
+                </section>
+              </div>
+            </section>
+
+            <aside class="result-column">
+              <section class="panel score-panel">
+                <header><span>分析结论</span><small id="resultState">WAITING</small></header>
+                <div class="score-hero">
+                  <div class="score-ring" id="scoreRing"><strong id="uniformityScore">—</strong><small>/ 100</small></div>
+                  <div><p>综合均匀性</p><strong id="uniformityLabel">等待分析</strong><span id="uniformityHint">导入图像后生成快速判断</span></div>
+                </div>
+                <p id="resultNarrative" class="result-narrative">浏览器端结果用于快速筛选；正式报告请以 OptCNT 桌面端骨架分析为准。</p>
+              </section>
+
+              <section class="panel metrics-panel">
+                <div class="panel-heading"><div><span class="step-index">03</span><h2>核心指标</h2></div><button id="exportMetrics" class="text-button" type="button" disabled>导出 CSV</button></div>
+                <div class="metric-grid">
+                  <article><span>CNT 候选数</span><strong id="metricCount">—</strong><small>连通结构</small></article>
+                  <article><span>分散比例</span><strong id="metricDispersed">—</strong><small>数量维度</small></article>
+                  <article><span>网格 CV</span><strong id="metricGridCv">—</strong><small>越低越均匀</small></article>
+                  <article><span>团聚面积</span><strong id="metricAggArea">—</strong><small>占 ROI 面积</small></article>
+                  <article><span>P90 宽度</span><strong id="metricP90Width">—</strong><small>μm</small></article>
+                  <article><span>平均长度</span><strong id="metricMeanLength">—</strong><small>μm</small></article>
+                </div>
+              </section>
+
+              <section class="panel insight-panel">
+                <div class="panel-heading"><div><span class="step-index">04</span><h2>质量提示</h2></div></div>
+                <ul id="insightList">
+                  <li class="neutral"><span>i</span><p>数量多不等于分布均匀；请同时查看分散比例与网格 CV。</p></li>
+                  <li class="neutral"><span>i</span><p>当前网页采用连通域近似，不能替代桌面端的骨架分支消歧。</p></li>
+                </ul>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section id="page-compare" class="page" data-page-panel="compare">
+          <header class="page-heading compact">
+            <div>
+              <p class="eyebrow">BASELINE × EXPERIMENT</p>
+              <h1>组间对比，<em>把差异放在同一尺度。</em></h1>
+              <p class="page-lead">分别导入 base 组与实验组图像，复用当前识别参数，比较五项主指标。</p>
+            </div>
+          </header>
+
+          <div class="compare-upload-grid">
+            <section class="panel group-upload base-group">
+              <header><div><span>BASE</span><h2>base 组 · 基准参考</h2></div><strong id="baseCount">0 张</strong></header>
+              <label class="multi-drop" for="baseInput">
+                <input id="baseInput" type="file" accept="image/*,.tif,.tiff" multiple />
+                <span>＋</span><strong>选择基准图像</strong><small>建议 3–15 张，最多处理 20 张</small>
+              </label>
+              <ul id="baseFiles" class="file-list"><li class="placeholder">尚未选择图像</li></ul>
+            </section>
+
+            <section class="panel group-upload experiment-group">
+              <header><div><span>EXPERIMENT</span><h2>实验组 · 实验候选</h2></div><strong id="experimentCount">0 张</strong></header>
+              <label class="multi-drop" for="experimentInput">
+                <input id="experimentInput" type="file" accept="image/*,.tif,.tiff" multiple />
+                <span>＋</span><strong>选择实验图像</strong><small>建议 3–15 张，最多处理 20 张</small>
+              </label>
+              <ul id="experimentFiles" class="file-list"><li class="placeholder">尚未选择图像</li></ul>
+            </section>
+          </div>
+
+          <section class="compare-action-bar">
+            <div><span class="privacy-dot"></span><p><strong>同参数批量分析</strong><small>使用单图页当前标尺、范围与识别阈值</small></p></div>
+            <button id="compareButton" class="primary-button compact-button" type="button" disabled><span>开始组间对比</span><i>→</i></button>
+          </section>
+
+          <section id="compareResults" class="compare-results hidden">
+            <div class="compare-summary-grid">
+              <section class="panel compare-verdict">
+                <p>QUICK VERDICT</p>
+                <h2 id="compareVerdictTitle">对比完成</h2>
+                <span id="compareVerdictText">—</span>
+              </section>
+              <section class="panel compare-stat"><span>base 组样本</span><strong id="baseAnalyzed">—</strong><small id="baseStatus">—</small></section>
+              <section class="panel compare-stat accent"><span>实验组样本</span><strong id="experimentAnalyzed">—</strong><small id="experimentStatus">—</small></section>
+            </div>
+
+            <section class="panel comparison-chart-panel">
+              <header><div><p>五项主指标</p><h2>标准化组间表现</h2></div><div class="compare-legend"><span><i class="base-color"></i>base 组</span><span><i class="experiment-color"></i>实验组</span></div></header>
+              <div class="comparison-canvas-wrap"><canvas id="comparisonCanvas"></canvas></div>
+              <p class="chart-note">标准化仅用于同图比较：分散比例越高越好；网格 CV、团聚面积与 P90 宽度越低越好。CNT 数量仅呈现差异，不直接代表优劣。</p>
+            </section>
+
+            <section class="panel comparison-table-panel">
+              <header><h2>指标明细</h2><button id="exportComparison" class="text-button" type="button">导出 CSV</button></header>
+              <div class="table-scroll">
+                <table>
+                  <thead><tr><th>指标</th><th>base 组均值</th><th>实验组均值</th><th>相对变化</th><th>方向</th></tr></thead>
+                  <tbody id="comparisonTableBody"></tbody>
+                </table>
+              </div>
+            </section>
+          </section>
+        </section>
+
+        <section id="page-method" class="page" data-page-panel="method">
+          <header class="page-heading compact">
+            <div>
+              <p class="eyebrow">METHOD & BOUNDARIES</p>
+              <h1>快速预览有边界，<em>科学结论要可追溯。</em></h1>
+              <p class="page-lead">网页端负责无上传的快速筛选；OptCNT 桌面端负责完整骨架、轮廓、统计检验与报告输出。</p>
+            </div>
+          </header>
+
+          <div class="method-flow">
+            <article><span>01</span><i>LOCAL DECODE</i><h2>本地解码</h2><p>图像只进入浏览器内存，页面刷新后即释放，不发送到 Ali 服务器。</p></article>
+            <article><span>02</span><i>SEGMENTATION</i><h2>自适应分割</h2><p>依据局部灰度均值和灵敏度生成候选掩码，支持深色目标与 ROI 范围。</p></article>
+            <article><span>03</span><i>COMPONENTS</i><h2>连通结构</h2><p>通过八邻域连通域、协方差主轴与细长度快速估计候选长度和宽度。</p></article>
+            <article><span>04</span><i>SPATIAL GRID</i><h2>空间统计</h2><p>以 5 × 5 网格汇总质心密度，计算网格 CV 与快速均匀性映射。</p></article>
+          </div>
+
+          <div class="boundary-grid">
+            <section class="panel boundary-card browser-boundary">
+              <p>浏览器快速模式</p><h2>适合初筛与趋势复核</h2>
+              <ul><li>单图快速预览</li><li>同参数组间对比</li><li>候选长度与宽度近似</li><li>空间网格趋势</li><li>不上传原始图片</li></ul>
+            </section>
+            <section class="panel boundary-card desktop-boundary">
+              <p>OptCNT 桌面端</p><h2>适合正式分析与报告</h2>
+              <ul><li>骨架图直径路径测量</li><li>轮廓与分支消歧</li><li>自动 / 手动标尺校准</li><li>ROI 与多图统计检验</li><li>完整摘要、图表和数据导出</li></ul>
+            </section>
+          </div>
+
+          <section class="method-warning">
+            <strong>结果边界</strong>
+            <p>网页端“CNT 候选数”来自连通结构，不等同于桌面端逐根 CNT 计数；团聚网络可能合并，断裂结构也可能被拆分。任何用于论文、专利、质量判定或工艺决策的数据，应回到桌面端复核。</p>
+          </section>
+        </section>
+      </main>
+
+      <nav class="mobile-nav" aria-label="移动端导航">
+        <button class="active" type="button" data-page="single"><span>◫</span><small>单图</small></button>
+        <button type="button" data-page="compare"><span>⇄</span><small>对比</small></button>
+        <button type="button" data-page="method"><span>⌁</span><small>方法</small></button>
+      </nav>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js" defer></script>
+  </body>
+</html>
