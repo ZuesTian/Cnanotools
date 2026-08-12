@@ -329,7 +329,7 @@ tbody tr:last-child td { border-bottom: 0; }
   .canvas-stage { min-height: 470px; }
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1320px) {
   .sidebar { width: 78px; padding-inline: 10px; }
   .brand { justify-content: center; padding-inline: 0; }
   .brand-logo-wrap { width: 58px; flex-basis: 58px; padding: 3px; }
