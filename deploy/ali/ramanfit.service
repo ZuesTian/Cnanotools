@@ -1,0 +1,27 @@
+[Unit]
+Description=RamanFit Pro CNT analysis API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ramanfit
+Group=ramanfit
+WorkingDirectory=/opt/ramanfit/current
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/science-tools/.venv/bin/gunicorn webapp:app --bind 127.0.0.1:8771 --workers 1 --threads 2 --worker-class gthread --timeout 180 --graceful-timeout 25 --access-logfile - --error-logfile -
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target

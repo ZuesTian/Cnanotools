@@ -1,0 +1,36 @@
+grain-peak.47.236.76.214.nip.io {
+	encode zstd gzip
+	request_body {
+		max_size 3MB
+	}
+	reverse_proxy 127.0.0.1:8772
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Frame-Options SAMEORIGIN
+	}
+}
+
+uv-spectrum.47.236.76.214.nip.io {
+	encode zstd gzip
+	root * /opt/uv-spectrum/current/web
+	file_server
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Frame-Options SAMEORIGIN
+	}
+}
+
+raman.47.236.76.214.nip.io {
+	encode zstd gzip
+	request_body {
+		max_size 5MB
+	}
+	reverse_proxy 127.0.0.1:8771
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Frame-Options SAMEORIGIN
+	}
+}

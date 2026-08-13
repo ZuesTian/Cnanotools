@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#102d2b" />
-    <meta name="description" content="CNT 远端工具总览：光学、TEM、BET 与生产数据分析服务" />
+    <meta name="description" content="CNT 科学工具总览：图像、粒度、光谱、性质预测与生产数据分析" />
     <title>CNT Lab · 远端工具总览</title>
     <link rel="icon" type="image/png" href="assets/cnano-logo.png" />
     <link rel="stylesheet" href="styles.css" />
@@ -24,10 +24,10 @@
         <div class="hero-copy">
           <p class="eyebrow">CARBON NANOTUBE · DIGITAL WORKBENCH</p>
           <h1>一处入口，连接<br><em>从图像到工艺</em>的 CNT 工具。</h1>
-          <p class="lede">集中访问光学显微镜、TEM、BET / 电阻率预测和生产数据分析服务。每项工具保持独立运行，入口页只负责导航与状态展示。</p>
+          <p class="lede">集中访问光学、TEM、粒度分峰、UV 光谱、拉曼、BET / 电阻率预测和生产数据分析服务。每项工具保持独立运行，入口页只负责导航与状态展示。</p>
           <div class="hero-meta">
             <div><strong id="onlineCount">—</strong><span>在线服务</span></div>
-            <div><strong>4</strong><span>专业工具</span></div>
+            <div><strong>7</strong><span>专业工具</span></div>
             <div><strong>HTTPS</strong><span>加密访问</span></div>
           </div>
         </div>
@@ -88,18 +88,50 @@
             <div class="tag-row"><span>登录保护</span><span>生产 KPI</span><span>质量门禁</span></div>
             <a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/" data-tool-link><span>打开工作台</span><b>↗</b></a>
           </article>
+
+          <article class="tool-card" data-service="grain">
+            <div class="card-top"><span class="tool-index">05</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="tool-symbol grain-symbol"><i></i><i></i><i></i><i></i></div>
+            <p class="tool-type">PARTICLE SIZE DECONVOLUTION</p>
+            <h3>GrainPeak 粒度分峰</h3>
+            <p class="tool-description">粒度分布多峰拟合，支持高斯、偏斜高斯和伪沃伊特模型，输出峰参数、R²、RMSE 与面积占比。</p>
+            <div class="tag-row"><span>多峰拟合</span><span>粒度分布</span><span>CSV 导出</span></div>
+            <a class="tool-link" href="https://grain-peak.47.236.76.214.nip.io/" data-tool-link><span>打开分峰台</span><b>↗</b></a>
+          </article>
+
+          <article class="tool-card" data-service="uv">
+            <div class="card-top"><span class="tool-index">06</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="tool-symbol uv-symbol"><i></i></div>
+            <p class="tool-type">UV–VIS SPECTRUM</p>
+            <h3>UV 光谱积分工作台</h3>
+            <p class="tool-description">多光谱叠加、拖拽选区、线性基线扣除与峰面积对比；全部计算在浏览器内完成。</p>
+            <div class="tag-row"><span>UV–Vis</span><span>峰面积</span><span>本地计算</span></div>
+            <a class="tool-link" href="https://uv-spectrum.47.236.76.214.nip.io/" data-tool-link><span>打开光谱台</span><b>↗</b></a>
+          </article>
+
+          <article class="tool-card" data-service="raman">
+            <div class="card-top"><span class="tool-index">07</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="tool-symbol raman-symbol"><i></i><i></i><i></i></div>
+            <p class="tool-type">CNT RAMAN SPECTROSCOPY</p>
+            <h3>RamanFit Pro</h3>
+            <p class="tool-description">RBM、D 带与 G 带自动检测拟合，并给出直径、候选手性、M/S 比、G/D 比和 CNT 类型。</p>
+            <div class="tag-row"><span>拉曼拟合</span><span>RBM 手性</span><span>CNT 判定</span></div>
+            <a class="tool-link" href="https://raman.47.236.76.214.nip.io/" data-tool-link><span>打开拉曼台</span><b>↗</b></a>
+          </article>
         </div>
       </section>
 
       <section class="workflow-section">
         <div class="shell workflow-inner">
-          <div class="workflow-copy"><p class="eyebrow">WORKFLOW MAP</p><h2>各司其职，形成材料数据闭环</h2><p>图像结构、材料性质与生产过程分别由对应工具负责；需要正式结论时，应保留原始图像、参数快照、模型版本与导出报告。</p></div>
+          <div class="workflow-copy"><p class="eyebrow">WORKFLOW MAP</p><h2>各司其职，形成材料数据闭环</h2><p>图像结构、粒度与光谱、材料性质和生产过程分别由对应工具负责；需要正式结论时，应保留原始数据、参数快照、模型版本与导出报告。</p></div>
           <div class="workflow-flow">
             <article><span>IMAGE</span><strong>OPT / TEM</strong><small>结构与分布</small></article>
             <i>→</i>
-            <article><span>PROPERTY</span><strong>BET / ρ</strong><small>性质预测</small></article>
+            <article><span>PARTICLE</span><strong>GRAINPEAK</strong><small>粒度与团聚</small></article>
             <i>→</i>
-            <article><span>PROCESS</span><strong>PRODUCTION</strong><small>生产决策</small></article>
+            <article><span>SPECTRUM</span><strong>UV / RAMAN</strong><small>光谱与手性</small></article>
+            <i>→</i>
+            <article><span>PROPERTY / PROCESS</span><strong>BET / PROD</strong><small>预测与决策</small></article>
           </div>
         </div>
       </section>
