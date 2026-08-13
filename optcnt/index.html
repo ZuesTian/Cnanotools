@@ -4,13 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0d2f2d" />
+    <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
       content="OptCNT 光学显微镜 CNT 图像浏览器快速分析与组间对比工作台"
     />
     <title>OptCNT · 光学图像分析台</title>
     <link rel="icon" type="image/png" href="../assets/cnano-logo.png" />
+    <script src="theme.js?v=20260813"></script>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="theme.css?v=20260813" />
   </head>
   <body>
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -68,6 +71,9 @@
           </div>
           <div class="topbar-actions">
             <a class="portal-link" href="../">工具总览 <span>↗</span></a>
+            <button class="theme-toggle" type="button" data-theme-toggle>
+              <span data-theme-icon aria-hidden="true">☾</span><span data-theme-label>深色</span>
+            </button>
             <span class="engine-status"><i></i>浏览器引擎就绪</span>
             <button id="helpButton" class="icon-button" type="button" aria-label="查看方法说明">?</button>
           </div>
