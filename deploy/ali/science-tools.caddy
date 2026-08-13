@@ -25,7 +25,7 @@ uv-spectrum.47.236.76.214.nip.io {
 raman.47.236.76.214.nip.io {
 	encode zstd gzip
 	request_body {
-		max_size 25MB
+		max_size 26MB
 	}
 	reverse_proxy 127.0.0.1:8771
 	header {
