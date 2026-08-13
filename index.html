@@ -4,10 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#102d2b" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="description" content="CNT 科学工具总览：图像、粒度、光谱、性质预测与生产数据分析" />
     <title>CNT Lab · 远端工具总览</title>
     <link rel="icon" type="image/png" href="assets/cnano-logo.png" />
+    <script src="theme.js?v=20260813"></script>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="theme.css?v=20260813" />
   </head>
   <body>
     <header class="site-header shell">
@@ -16,7 +19,13 @@
         <span class="brand-divider" aria-hidden="true"></span>
         <span><strong>CNT LAB</strong><small>REMOTE TOOLBOX</small></span>
       </a>
-      <div class="header-status"><i></i><span id="serviceSummary">正在检查远端服务</span></div>
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle>
+          <span class="theme-toggle__icon" data-theme-icon aria-hidden="true">☾</span>
+          <span data-theme-label>深色</span>
+        </button>
+        <div class="header-status"><i></i><span id="serviceSummary">正在检查远端服务</span></div>
+      </div>
     </header>
 
     <main id="top">
