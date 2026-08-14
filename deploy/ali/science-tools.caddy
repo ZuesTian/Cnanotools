@@ -2,7 +2,7 @@ grain-peak.47.236.76.214.nip.io {
 	encode zstd gzip
 	@document path /
 	header @document Cache-Control "no-cache"
-	@versionedAssets path_regexp versionedAssets \\.(css|js)$
+	@versionedAssets path_regexp versionedAssets \.(css|js)$
 	header @versionedAssets Cache-Control "public, max-age=31536000, immutable"
 	request_body {
 		max_size 15MB
@@ -19,7 +19,7 @@ uv-spectrum.47.236.76.214.nip.io {
 	encode zstd gzip
 	@document path /
 	header @document Cache-Control "no-cache"
-	@versionedAssets path_regexp versionedAssets \\.(css|js)$
+	@versionedAssets path_regexp versionedAssets \.(css|js)$
 	header @versionedAssets Cache-Control "public, max-age=31536000, immutable"
 	root * /opt/uv-spectrum/current/web
 	file_server
@@ -34,7 +34,7 @@ raman.47.236.76.214.nip.io {
 	encode zstd gzip
 	@document path /
 	header @document Cache-Control "no-cache"
-	@versionedAssets path_regexp versionedAssets \\.(css|js)$
+	@versionedAssets path_regexp versionedAssets \.(css|js)$
 	header @versionedAssets Cache-Control "public, max-age=31536000, immutable"
 	request_body {
 		max_size 26MB
