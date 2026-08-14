@@ -1,0 +1,14 @@
+[Unit]
+Description=Prune superseded CNT application releases
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/prune-cnt-releases
+Environment=KEEP_ROLLBACKS=2
+Nice=10
+IOSchedulingClass=idle
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=false

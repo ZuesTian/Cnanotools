@@ -1,0 +1,11 @@
+[Unit]
+Description=Weekly CNT application release retention
+
+[Timer]
+OnCalendar=Sun *-*-* 04:20:00
+RandomizedDelaySec=30m
+Persistent=true
+Unit=cnt-release-prune.service
+
+[Install]
+WantedBy=timers.target
