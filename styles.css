@@ -23,4 +23,4 @@
 .tool-card h3{margin-bottom:9px;font-size:22px}
 .tool-description{margin-bottom:15px}
 .tag-row{margin-bottom:20px}
-@media(max-width:980px){.tool-grid{grid-template-columns:1fr}.group-heading{align-items:flex-start;flex-direction:column;gap:6px}}
+@media(max-width:980px){.group-heading{align-items:flex-start;flex-direction:column;gap:6px}}
