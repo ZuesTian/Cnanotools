@@ -33,7 +33,7 @@
         <div class="hero-copy">
           <p class="eyebrow">CARBON NANOTUBE · DIGITAL WORKBENCH</p>
           <h1>一处入口，连接<br><em>从图像到工艺</em>的 CNT 工具。</h1>
-          <p class="lede">集中访问光学、SEM、TEM、粒度分峰、UV 光谱、拉曼、BET / 电阻率预测和生产数据分析服务。每项工具保持独立运行，入口页只负责导航与状态展示。</p>
+          <p class="lede">集中访问光学、TEM、SEM、粒度分峰、UV 光谱、拉曼、BET / 电阻率预测和生产数据分析服务。每项工具保持独立运行，入口页只负责导航与状态展示。</p>
           <div class="hero-meta">
             <div><strong id="onlineCount">—</strong><span>在线服务</span></div>
             <div><strong>8</strong><span>专业工具</span></div>
@@ -54,9 +54,14 @@
       <section class="tools-section shell">
         <header class="section-heading">
           <div><p class="eyebrow">AVAILABLE WORKSPACES</p><h2>远端工具</h2></div>
-          <p>按任务选择入口。图像工具、模型工具和生产工作台之间的数据不会自动互通。</p>
+          <p>按任务类别分组：图像结构、粒度光谱与性质生产各成一组，序号全局连续。各组工具独立运行，数据不会自动互通。</p>
         </header>
 
+      <div class="tool-group">
+        <header class="group-heading">
+          <div><p class="eyebrow">IMAGE · STRUCTURE</p><h3>图像与结构分析</h3></div>
+          <span class="group-count">3 个工具</span>
+        </header>
         <div class="tool-grid">
           <article class="tool-card featured" data-service="opt">
             <div class="card-top"><span class="tool-index">01</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
@@ -87,29 +92,15 @@
             <div class="tag-row"><span>SEM 图像</span><span>管径统计</span><span>CSV 导出</span></div>
             <a class="tool-link" href="https://sem.47.236.76.214.nip.io/?v=20260821" data-tool-link><span>打开分析台</span><b>↗</b></a>
           </article>
-
-          <article class="tool-card" data-service="bet">
-            <div class="card-top"><span class="tool-index">04</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol bet-symbol"><span></span><span></span><span></span><span></span><span></span></div>
-            <p class="tool-type">PROPERTY PREDICTION</p>
-            <h3>CNT‑BET 预测工作台</h3>
-            <p class="tool-description">BET、粉末电阻率、批量预测与反向设计，支持 MWCNT / SWCNT 结构或工艺模型。</p>
-            <div class="tag-row"><span>BET</span><span>电阻率</span><span>反向设计</span></div>
-            <a class="tool-link" href="https://47.236.76.214.nip.io/?v=20260814-paste" data-tool-link><span>打开预测台</span><b>↗</b></a>
-          </article>
-
-          <article class="tool-card protected" data-service="production">
-            <div class="card-top"><span class="tool-index">05</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol production-symbol"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <p class="tool-type">PRODUCTION INTELLIGENCE</p>
-            <h3>CNT 生产数据分析</h3>
-            <p class="tool-description">厂内生产数据版本、质量门禁、炉号排名、异常诊断与报表闭环。需要授权账号。</p>
-            <div class="tag-row"><span>登录保护</span><span>生产 KPI</span><span>质量门禁</span></div>
-            <a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/" data-tool-link><span>打开工作台</span><b>↗</b></a>
-          </article>
-
+        </div>
+      </div><div class="tool-group">
+        <header class="group-heading">
+          <div><p class="eyebrow">PARTICLE · SPECTRUM</p><h3>粒度与光谱</h3></div>
+          <span class="group-count">3 个工具</span>
+        </header>
+        <div class="tool-grid">
           <article class="tool-card" data-service="grain">
-            <div class="card-top"><span class="tool-index">06</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="card-top"><span class="tool-index">04</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
             <div class="tool-symbol grain-symbol"><i></i><i></i><i></i><i></i></div>
             <p class="tool-type">PARTICLE SIZE DECONVOLUTION</p>
             <h3>GrainPeak 粒度分峰</h3>
@@ -119,7 +110,7 @@
           </article>
 
           <article class="tool-card" data-service="uv">
-            <div class="card-top"><span class="tool-index">07</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="card-top"><span class="tool-index">05</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
             <div class="tool-symbol uv-symbol"><i></i></div>
             <p class="tool-type">UV–VIS SPECTRUM</p>
             <h3>UV 光谱积分工作台</h3>
@@ -129,7 +120,7 @@
           </article>
 
           <article class="tool-card" data-service="raman">
-            <div class="card-top"><span class="tool-index">08</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="card-top"><span class="tool-index">06</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
             <div class="tool-symbol raman-symbol"><i></i><i></i><i></i></div>
             <p class="tool-type">CNT RAMAN SPECTROSCOPY</p>
             <h3>RamanFit Pro</h3>
@@ -138,6 +129,33 @@
             <a class="tool-link" href="https://raman.47.236.76.214.nip.io/" data-tool-link><span>打开拉曼台</span><b>↗</b></a>
           </article>
         </div>
+      </div><div class="tool-group">
+        <header class="group-heading">
+          <div><p class="eyebrow">PROPERTY · PROCESS</p><h3>性质预测与生产</h3></div>
+          <span class="group-count">2 个工具</span>
+        </header>
+        <div class="tool-grid">
+          <article class="tool-card" data-service="bet">
+            <div class="card-top"><span class="tool-index">07</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="tool-symbol bet-symbol"><span></span><span></span><span></span><span></span><span></span></div>
+            <p class="tool-type">PROPERTY PREDICTION</p>
+            <h3>CNT‑BET 预测工作台</h3>
+            <p class="tool-description">BET、粉末电阻率、批量预测与反向设计，支持 MWCNT / SWCNT 结构或工艺模型。</p>
+            <div class="tag-row"><span>BET</span><span>电阻率</span><span>反向设计</span></div>
+            <a class="tool-link" href="https://47.236.76.214.nip.io/?v=20260814-paste" data-tool-link><span>打开预测台</span><b>↗</b></a>
+          </article>
+
+          <article class="tool-card protected" data-service="production">
+            <div class="card-top"><span class="tool-index">08</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
+            <div class="tool-symbol production-symbol"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="tool-type">PRODUCTION INTELLIGENCE</p>
+            <h3>CNT 生产数据分析</h3>
+            <p class="tool-description">厂内生产数据版本、质量门禁、炉号排名、异常诊断与报表闭环。需要授权账号。</p>
+            <div class="tag-row"><span>登录保护</span><span>生产 KPI</span><span>质量门禁</span></div>
+            <a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/" data-tool-link><span>打开工作台</span><b>↗</b></a>
+          </article>
+        </div>
+      </div>
       </section>
 
       <section class="workflow-section">
