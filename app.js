@@ -3,6 +3,7 @@
 const services = {
   opt: { url: "https://opt-cnt.47.236.76.214.nip.io/api/v1/health", fallback: "https://opt-cnt.47.236.76.214.nip.io/", method: "GET" },
   tem: { url: "https://tem-cnt.47.236.76.214.nip.io/api/health", fallback: "https://tem-cnt.47.236.76.214.nip.io/", method: "GET" },
+  sem: { url: "https://sem.47.236.76.214.nip.io/api/v1/health", fallback: "https://sem.47.236.76.214.nip.io/", method: "GET" },
   bet: { url: "https://47.236.76.214.nip.io/api/config", method: "GET" },
   production: { url: "https://cnt-analysis.47.236.76.214.nip.io/api/v1/health", method: "GET" },
   grain: { url: "https://grain-peak.47.236.76.214.nip.io/api/health", method: "GET" },
