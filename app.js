@@ -9,6 +9,7 @@ const services = {
   grain: { url: "https://grain-peak.47.236.76.214.nip.io/api/health", method: "GET" },
   uv: { url: "https://uv-spectrum.47.236.76.214.nip.io/health", method: "GET" },
   raman: { url: "https://raman.47.236.76.214.nip.io/api/health", method: "GET" },
+  furnace: { url: "https://47.236.76.214.nip.io/oc-furnace-report-plain-v6/", fallback: "https://sim-db.47.236.76.214.nip.io/", method: "GET" },
 };
 
 async function probe(config) {

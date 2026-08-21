@@ -24,3 +24,5 @@
 .tool-description{margin-bottom:15px}
 .tag-row{margin-bottom:20px}
 @media(max-width:980px){.group-heading{align-items:flex-start;flex-direction:column;gap:6px}}
+
+.simdb-symbol{display:grid;grid-template-columns:repeat(3,5px);gap:4px;place-content:center;background:#f3ecfa}.simdb-symbol i{width:5px;height:5px;border-radius:50%;background:#7767bf;opacity:.45}.simdb-symbol i:nth-child(-n+4){opacity:1}
