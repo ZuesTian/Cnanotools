@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="assets/cnano-logo.png" />
   <script src="theme.js?v=20260813"></script>
   <link rel="stylesheet" href="theme.css?v=20260821b" />
-  <link rel="stylesheet" href="styles.css?v=20260911-portal" />
+  <link rel="stylesheet" href="styles.css?v=20260911-refined" />
   <script src="app.js?v=20260911-portal" defer></script>
 </head>
 <body class="portal">
@@ -21,26 +21,42 @@
   </header>
   <main id="top">
     <section class="intro shell">
-      <div class="intro-copy"><p class="eyebrow">CARBON NANOTUBE · RESEARCH WORKSPACE</p><h1>从看见结构，<br>到理解碳管。</h1><p class="lede">图像、光谱、材料性质与生产数据。<br>按研究任务，找到合适的分析工具。</p><div class="intro-meta"><span><strong>10</strong> 个工具与数据库</span><span><strong>4</strong> 类研究任务</span></div></div>
-      <aside class="vision-launch" aria-labelledby="vision-launch-title"><div class="launch-top"><span class="launch-icon" aria-hidden="true">V</span><span class="new-label">新增工作台</span></div><p class="eyebrow">CNT VISION</p><h2 id="vision-launch-title">问一问你的碳管图像</h2><p>分布是否均匀？碳管有多长、多宽？<br>上传图像，标定尺寸，再继续追问。</p><div class="launch-tags"><span>分布与团聚</span><span>长度与宽度</span><span>连续问答</span></div><a class="primary-link" href="vision/">打开视觉问答 <span aria-hidden="true">↗</span></a></aside>
+      <div class="intro-copy">
+        <p class="eyebrow">CARBON NANOTUBE · DIGITAL WORKBENCH</p>
+        <h1>一处入口，连接<br><em>从图像到工艺。</em></h1>
+        <p class="lede">看清碳管结构，读懂材料数据。<br>连接图像分析、光谱表征、性质预测与生产研究。</p>
+        <a class="vision-shortcut" href="vision/"><span class="shortcut-label">NEW</span> 碳管视觉问答 <span aria-hidden="true">↗</span></a>
+        <div class="intro-meta"><span><strong>10</strong> 工具与数据库</span><span><strong>4</strong> 研究任务分组</span></div>
+      </div>
+      <nav class="cnt-map" aria-label="CNT 研究工具快捷导航">
+        <div class="map-ring ring-outer" aria-hidden="true"></div><div class="map-ring ring-inner" aria-hidden="true"></div>
+        <a class="map-core" href="#tools" aria-label="查看全部 CNT 工具"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>CNT</b></a>
+        <a class="map-node node-opt" href="https://opt-cnt.47.236.76.214.nip.io/?v=20260814-paste2" aria-label="打开 OptCNT 光学分析">OPT</a>
+        <a class="map-node node-tem" href="https://tem-cnt.47.236.76.214.nip.io/?v=20260814-paste" aria-label="打开 TEM 图像分析">TEM</a>
+        <a class="map-node node-bet" href="#process-tools" aria-label="查看性质预测与生产工具">BET</a>
+        <a class="map-node node-vision" href="vision/" aria-label="打开碳管视觉问答">VISION</a>
+        <span class="map-caption caption-image" aria-hidden="true">MICROGRAPH</span><span class="map-caption caption-structure" aria-hidden="true">STRUCTURE</span><span class="map-caption caption-property" aria-hidden="true">PROPERTY</span>
+      </nav>
     </section>
     <nav class="category-nav shell" aria-label="工具分类"><a href="#image-tools"><span>01</span> 图像与结构 <b>4</b></a><a href="#spectrum-tools"><span>02</span> 粒度与光谱 <b>3</b></a><a href="#process-tools"><span>03</span> 性质与生产 <b>2</b></a><a href="#simulation-tools"><span>04</span> 模拟数据库 <b>1</b></a></nav>
     <div class="tools-section shell" id="tools">
       <div class="tools-intro"><p>按任务选择工作台</p><div class="service-overview"><span id="serviceSummary" role="status">正在检查接口响应</span><button id="refreshServices" type="button">重新检查</button></div></div>
       <section class="tool-group" id="image-tools" aria-labelledby="image-title">
         <header class="group-heading"><div><p class="eyebrow">IMAGE & STRUCTURE</p><h2 id="image-title">图像与结构</h2></div><p>先观察分布，再测量尺寸。</p></header>
+        <article class="tool-card vision-feature" data-service="vision">
+          <div class="tool-symbol vision-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M15 7H9a2 2 0 0 0-2 2v6m26-8h6a2 2 0 0 1 2 2v6M7 33v6a2 2 0 0 0 2 2h6m26-8v6a2 2 0 0 1-2 2h-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M11 24s5-8 13-8 13 8 13 8-5 8-13 8-13-8-13-8Z" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="4" fill="currentColor"/></svg></div>
+          <div class="feature-copy"><div class="feature-kicker"><span class="tool-index">01</span><p class="tool-type">CNT VISION · 图像理解</p></div><h3>让图像，回答你的问题。</h3><p class="tool-description">询问碳管分布、团聚与取向，结合标尺估算长度和宽度。</p></div>
+          <div class="feature-action"><span class="status-pill checking"><i></i><b>检查中</b></span><a class="tool-link" href="vision/"><span>打开碳管视觉问答</span><b aria-hidden="true">↗</b></a></div>
+        </article>
         <div class="tool-grid image-grid">
-          <article class="tool-card vision-card" data-service="vision">
-            <div class="card-top"><span class="tool-index">01</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon vision-icon" aria-hidden="true">AI</span><p class="tool-type">VISION LANGUAGE MODEL</p><h3>碳管视觉问答</h3><p class="tool-description">与显微图像对话，判断分布、团聚与取向，结合标尺估算长度和宽度。</p><div class="tag-row"><span>图像问答</span><span>尺寸估算</span></div><a class="tool-link" href="vision/"><span>打开视觉问答</span><b aria-hidden="true">↗</b></a>
-          </article>
           <article class="tool-card" data-service="opt">
-            <div class="card-top"><span class="tool-index">02</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon" aria-hidden="true">OPT</span><p class="tool-type">OPTICAL MICROGRAPH</p><h3>OptCNT 光学分析</h3><p class="tool-description">光学图像骨架提取、逐根测量、空间均匀性与团聚判定，支持组间对比。</p><div class="tag-row"><span>骨架分析</span><span>组间对比</span></div><a class="tool-link" href="https://opt-cnt.47.236.76.214.nip.io/?v=20260814-paste2"><span>打开分析台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">02</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol optical-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="tool-type">OPTICAL MICROGRAPH</p><h3>OptCNT 光学分析</h3><p class="tool-description">光学图像骨架提取、逐根测量、空间均匀性与团聚判定，支持组间对比。</p><div class="tag-row"><span>骨架分析</span><span>组间对比</span></div><a class="tool-link" href="https://opt-cnt.47.236.76.214.nip.io/?v=20260814-paste2"><span>打开分析台</span><b aria-hidden="true">↗</b></a>
           </article>
           <article class="tool-card" data-service="tem">
-            <div class="card-top"><span class="tool-index">03</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon" aria-hidden="true">TEM</span><p class="tool-type">TRANSMISSION ELECTRON</p><h3>TEM CNT Analyzer</h3><p class="tool-description">透射电镜图像结构识别与 ONNX 分析，辅助纳米尺度碳管结构复核。</p><div class="tag-row"><span>TEM 图像</span><span>结构识别</span></div><a class="tool-link" href="https://tem-cnt.47.236.76.214.nip.io/?v=20260814-paste"><span>打开分析台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">03</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol tem-symbol" aria-hidden="true"><span></span><span></span><span></span></div><p class="tool-type">TRANSMISSION ELECTRON</p><h3>TEM CNT Analyzer</h3><p class="tool-description">透射电镜图像结构识别与 ONNX 分析，辅助纳米尺度碳管结构复核。</p><div class="tag-row"><span>TEM 图像</span><span>结构识别</span></div><a class="tool-link" href="https://tem-cnt.47.236.76.214.nip.io/?v=20260814-paste"><span>打开分析台</span><b aria-hidden="true">↗</b></a>
           </article>
           <article class="tool-card" data-service="sem">
-            <div class="card-top"><span class="tool-index">04</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon" aria-hidden="true">SEM</span><p class="tool-type">SCANNING ELECTRON</p><h3>SEM CNT Analyzer</h3><p class="tool-description">扫描电镜管径分析，支持标尺识别、ROI 选区、管径分布与统计导出。</p><div class="tag-row"><span>管径统计</span><span>ROI 选区</span></div><a class="tool-link" href="https://sem.47.236.76.214.nip.io/?v=20260821"><span>打开分析台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">04</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol sem-symbol" aria-hidden="true"><i></i><i></i><i></i></div><p class="tool-type">SCANNING ELECTRON</p><h3>SEM CNT Analyzer</h3><p class="tool-description">扫描电镜管径分析，支持标尺识别、ROI 选区、管径分布与统计导出。</p><div class="tag-row"><span>管径统计</span><span>ROI 选区</span></div><a class="tool-link" href="https://sem.47.236.76.214.nip.io/?v=20260821"><span>打开分析台</span><b aria-hidden="true">↗</b></a>
           </article>
         </div>
       </section>
@@ -48,13 +64,13 @@
         <header class="group-heading"><div><p class="eyebrow">PARTICLE & SPECTRUM</p><h2 id="spectrum-title">粒度与光谱</h2></div><p>从分布与谱峰中提取材料信息。</p></header>
         <div class="tool-grid">
           <article class="tool-card" data-service="grain">
-            <div class="card-top"><span class="tool-index">05</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon warm-icon" aria-hidden="true">PSD</span><p class="tool-type">PARTICLE SIZE DECONVOLUTION</p><h3>GrainPeak 粒度分峰</h3><p class="tool-description">粒度分布多峰拟合，输出峰参数、拟合优度和面积占比。</p><div class="tag-row"><span>多峰拟合</span><span>CSV 导出</span></div><a class="tool-link" href="https://grain-peak.47.236.76.214.nip.io/"><span>打开分峰台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">05</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol grain-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="tool-type">PARTICLE SIZE DECONVOLUTION</p><h3>GrainPeak 粒度分峰</h3><p class="tool-description">粒度分布多峰拟合，输出峰参数、拟合优度和面积占比。</p><div class="tag-row"><span>多峰拟合</span><span>CSV 导出</span></div><a class="tool-link" href="https://grain-peak.47.236.76.214.nip.io/"><span>打开分峰台</span><b aria-hidden="true">↗</b></a>
           </article>
           <article class="tool-card" data-service="uv">
-            <div class="card-top"><span class="tool-index">06</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon warm-icon" aria-hidden="true">UV</span><p class="tool-type">UV–VIS SPECTRUM</p><h3>UV 光谱积分</h3><p class="tool-description">多光谱叠加、线性基线扣除与峰面积对比，全部计算在浏览器内完成。</p><div class="tag-row"><span>峰面积</span><span>本地计算</span></div><a class="tool-link" href="https://uv-spectrum.47.236.76.214.nip.io/"><span>打开光谱台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">06</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol uv-symbol" aria-hidden="true"><i></i></div><p class="tool-type">UV–VIS SPECTRUM</p><h3>UV 光谱积分</h3><p class="tool-description">多光谱叠加、线性基线扣除与峰面积对比，全部计算在浏览器内完成。</p><div class="tag-row"><span>峰面积</span><span>本地计算</span></div><a class="tool-link" href="https://uv-spectrum.47.236.76.214.nip.io/"><span>打开光谱台</span><b aria-hidden="true">↗</b></a>
           </article>
           <article class="tool-card" data-service="raman">
-            <div class="card-top"><span class="tool-index">07</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon warm-icon" aria-hidden="true">R</span><p class="tool-type">RAMAN SPECTROSCOPY</p><h3>RamanFit Pro</h3><p class="tool-description">RBM、D 带与 G 带检测拟合，分析直径、候选手性及碳管类型。</p><div class="tag-row"><span>拉曼拟合</span><span>RBM 手性</span></div><a class="tool-link" href="https://raman.47.236.76.214.nip.io/"><span>打开拉曼台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">07</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol raman-symbol" aria-hidden="true"><i></i><i></i><i></i></div><p class="tool-type">RAMAN SPECTROSCOPY</p><h3>RamanFit Pro</h3><p class="tool-description">RBM、D 带与 G 带检测拟合，分析直径、候选手性及碳管类型。</p><div class="tag-row"><span>拉曼拟合</span><span>RBM 手性</span></div><a class="tool-link" href="https://raman.47.236.76.214.nip.io/"><span>打开拉曼台</span><b aria-hidden="true">↗</b></a>
           </article>
         </div>
       </section>
@@ -62,10 +78,10 @@
         <header class="group-heading"><div><p class="eyebrow">PROPERTY & PROCESS</p><h2 id="process-title">性质与生产</h2></div><p>连接材料表征与工艺决策。</p></header>
         <div class="tool-grid pair-grid">
           <article class="tool-card" data-service="bet">
-            <div class="card-top"><span class="tool-index">08</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon blue-icon" aria-hidden="true">BET</span><p class="tool-type">PROPERTY PREDICTION</p><h3>CNT-BET 预测工作台</h3><p class="tool-description">BET、粉末电阻率与反向设计，支持 MWCNT / SWCNT 结构或工艺模型。</p><div class="tag-row"><span>性质预测</span><span>反向设计</span></div><a class="tool-link" href="https://47.236.76.214.nip.io/?v=20260814-paste"><span>打开预测台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">08</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol bet-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><p class="tool-type">PROPERTY PREDICTION</p><h3>CNT-BET 预测工作台</h3><p class="tool-description">BET、粉末电阻率与反向设计，支持 MWCNT / SWCNT 结构或工艺模型。</p><div class="tag-row"><span>性质预测</span><span>反向设计</span></div><a class="tool-link" href="https://47.236.76.214.nip.io/?v=20260814-paste"><span>打开预测台</span><b aria-hidden="true">↗</b></a>
           </article>
           <article class="tool-card" data-service="production">
-            <div class="card-top"><span class="tool-index">09</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon blue-icon" aria-hidden="true">DATA</span><p class="tool-type">PRODUCTION INTELLIGENCE</p><h3>CNT 生产数据分析</h3><p class="tool-description">质量门禁、炉号排名、异常诊断与生产报表。使用时需要授权账号。</p><div class="tag-row"><span>授权访问</span><span>生产 KPI</span></div><a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/"><span>打开工作台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">09</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol production-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><p class="tool-type">PRODUCTION INTELLIGENCE</p><h3>CNT 生产数据分析</h3><p class="tool-description">质量门禁、炉号排名、异常诊断与生产报表。使用时需要授权账号。</p><div class="tag-row"><span>授权访问</span><span>生产 KPI</span></div><a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/"><span>打开工作台</span><b aria-hidden="true">↗</b></a>
           </article>
         </div>
       </section>
