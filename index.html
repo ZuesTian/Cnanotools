@@ -1,198 +1,83 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#102d2b" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="description" content="CNT 科学工具总览：图像、粒度、光谱、性质预测与生产数据分析" />
-    <title>CNT Lab · 远端工具总览</title>
-    <link rel="icon" type="image/png" href="assets/cnano-logo.png" />
-    <script src="theme.js?v=20260813"></script>
-    <link rel="stylesheet" href="styles.css?v=20260821b" />
-    <link rel="stylesheet" href="theme.css?v=20260821b" />
-  </head>
-  <body>
-    <header class="site-header shell">
-      <a class="brand" href="#top">
-        <img class="cnano-logo" src="assets/cnano-logo.png" alt="天奈科技 Cnano" />
-        <span class="brand-divider" aria-hidden="true"></span>
-        <span><strong>CNT LAB</strong><small>REMOTE TOOLBOX</small></span>
-      </a>
-      <div class="header-actions">
-        <button class="theme-toggle" type="button" data-theme-toggle>
-          <span class="theme-toggle__icon" data-theme-icon aria-hidden="true">☾</span>
-          <span data-theme-label>深色</span>
-        </button>
-        <div class="header-status"><i></i><span id="serviceSummary">正在检查远端服务</span></div>
-      </div>
-    </header>
-
-    <main id="top">
-      <section class="hero shell">
-        <div class="hero-copy">
-          <p class="eyebrow">CARBON NANOTUBE · DIGITAL WORKBENCH</p>
-          <h1>一处入口，连接<br><em>从图像到工艺</em>的 CNT 工具。</h1>
-          <p class="lede">集中访问光学、TEM、SEM、粒度分峰、UV 光谱、拉曼、BET / 电阻率预测、生产数据分析服务和模拟数据库。每项工具保持独立运行，入口页只负责导航与状态展示。</p>
-          <div class="hero-meta">
-            <div><strong id="onlineCount">—</strong><span>在线服务</span></div>
-            <div><strong>9</strong><span>工具与数据库</span></div>
-            <div><strong>HTTPS</strong><span>加密访问</span></div>
-          </div>
-        </div>
-        <div class="hero-visual" aria-hidden="true">
-          <div class="orbit orbit-one"><span>OPT</span></div>
-          <div class="orbit orbit-two"><span>TEM</span></div>
-          <div class="orbit orbit-three"><span>BET</span></div>
-          <div class="core"><i></i><i></i><i></i><i></i><b>CNT</b></div>
-          <div class="data-label label-a">MICROGRAPH</div>
-          <div class="data-label label-b">PROCESS</div>
-          <div class="data-label label-c">PREDICTION</div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#102d2b" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="CNT Lab 碳管科学工具门户：视觉问答、图像测量、光谱分析、性质预测、生产数据与仿真归档。" />
+  <title>CNT Lab · 碳管科学工具</title>
+  <link rel="icon" type="image/png" href="assets/cnano-logo.png" />
+  <script src="theme.js?v=20260813"></script>
+  <link rel="stylesheet" href="theme.css?v=20260821b" />
+  <link rel="stylesheet" href="styles.css?v=20260911-portal" />
+  <script src="app.js?v=20260911-portal" defer></script>
+</head>
+<body class="portal">
+  <a class="skip-link" href="#tools">跳到工具列表</a>
+  <header class="site-header shell">
+    <a class="brand" href="#top" aria-label="CNT Lab 首页"><img class="cnano-logo" src="assets/cnano-logo.png" alt="天奈科技 Cnano" /><span class="brand-divider"></span><span><strong>CNT LAB</strong><small>碳管科学工具</small></span></a>
+    <div class="header-actions"><a class="header-link" href="vision/">视觉问答 ↗</a><button class="theme-toggle" type="button" data-theme-toggle><span data-theme-icon aria-hidden="true">☾</span><span data-theme-label>深色</span></button></div>
+  </header>
+  <main id="top">
+    <section class="intro shell">
+      <div class="intro-copy"><p class="eyebrow">CARBON NANOTUBE · RESEARCH WORKSPACE</p><h1>从看见结构，<br>到理解碳管。</h1><p class="lede">图像、光谱、材料性质与生产数据。<br>按研究任务，找到合适的分析工具。</p><div class="intro-meta"><span><strong>10</strong> 个工具与数据库</span><span><strong>4</strong> 类研究任务</span></div></div>
+      <aside class="vision-launch" aria-labelledby="vision-launch-title"><div class="launch-top"><span class="launch-icon" aria-hidden="true">V</span><span class="new-label">新增工作台</span></div><p class="eyebrow">CNT VISION</p><h2 id="vision-launch-title">问一问你的碳管图像</h2><p>分布是否均匀？碳管有多长、多宽？<br>上传图像，标定尺寸，再继续追问。</p><div class="launch-tags"><span>分布与团聚</span><span>长度与宽度</span><span>连续问答</span></div><a class="primary-link" href="vision/">打开视觉问答 <span aria-hidden="true">↗</span></a></aside>
+    </section>
+    <nav class="category-nav shell" aria-label="工具分类"><a href="#image-tools"><span>01</span> 图像与结构 <b>4</b></a><a href="#spectrum-tools"><span>02</span> 粒度与光谱 <b>3</b></a><a href="#process-tools"><span>03</span> 性质与生产 <b>2</b></a><a href="#simulation-tools"><span>04</span> 模拟数据库 <b>1</b></a></nav>
+    <div class="tools-section shell" id="tools">
+      <div class="tools-intro"><p>按任务选择工作台</p><div class="service-overview"><span id="serviceSummary" role="status">正在检查接口响应</span><button id="refreshServices" type="button">重新检查</button></div></div>
+      <section class="tool-group" id="image-tools" aria-labelledby="image-title">
+        <header class="group-heading"><div><p class="eyebrow">IMAGE & STRUCTURE</p><h2 id="image-title">图像与结构</h2></div><p>先观察分布，再测量尺寸。</p></header>
+        <div class="tool-grid image-grid">
+          <article class="tool-card vision-card" data-service="vision">
+            <div class="card-top"><span class="tool-index">01</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon vision-icon" aria-hidden="true">AI</span><p class="tool-type">VISION LANGUAGE MODEL</p><h3>碳管视觉问答</h3><p class="tool-description">与显微图像对话，判断分布、团聚与取向，结合标尺估算长度和宽度。</p><div class="tag-row"><span>图像问答</span><span>尺寸估算</span></div><a class="tool-link" href="vision/"><span>打开视觉问答</span><b aria-hidden="true">↗</b></a>
+          </article>
+          <article class="tool-card" data-service="opt">
+            <div class="card-top"><span class="tool-index">02</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon" aria-hidden="true">OPT</span><p class="tool-type">OPTICAL MICROGRAPH</p><h3>OptCNT 光学分析</h3><p class="tool-description">光学图像骨架提取、逐根测量、空间均匀性与团聚判定，支持组间对比。</p><div class="tag-row"><span>骨架分析</span><span>组间对比</span></div><a class="tool-link" href="https://opt-cnt.47.236.76.214.nip.io/?v=20260814-paste2"><span>打开分析台</span><b aria-hidden="true">↗</b></a>
+          </article>
+          <article class="tool-card" data-service="tem">
+            <div class="card-top"><span class="tool-index">03</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon" aria-hidden="true">TEM</span><p class="tool-type">TRANSMISSION ELECTRON</p><h3>TEM CNT Analyzer</h3><p class="tool-description">透射电镜图像结构识别与 ONNX 分析，辅助纳米尺度碳管结构复核。</p><div class="tag-row"><span>TEM 图像</span><span>结构识别</span></div><a class="tool-link" href="https://tem-cnt.47.236.76.214.nip.io/?v=20260814-paste"><span>打开分析台</span><b aria-hidden="true">↗</b></a>
+          </article>
+          <article class="tool-card" data-service="sem">
+            <div class="card-top"><span class="tool-index">04</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon" aria-hidden="true">SEM</span><p class="tool-type">SCANNING ELECTRON</p><h3>SEM CNT Analyzer</h3><p class="tool-description">扫描电镜管径分析，支持标尺识别、ROI 选区、管径分布与统计导出。</p><div class="tag-row"><span>管径统计</span><span>ROI 选区</span></div><a class="tool-link" href="https://sem.47.236.76.214.nip.io/?v=20260821"><span>打开分析台</span><b aria-hidden="true">↗</b></a>
+          </article>
         </div>
       </section>
-
-      <section class="tools-section shell">
-        <header class="section-heading">
-          <div><p class="eyebrow">AVAILABLE WORKSPACES</p><h2>远端工具</h2></div>
-          <p>按任务类别分组：图像结构、粒度光谱与性质生产各成一组，仿真数据单独归档为模拟数据库，序号全局连续。各组工具独立运行，数据不会自动互通。</p>
-        </header>
-
-      <div class="tool-group">
-        <header class="group-heading">
-          <div><p class="eyebrow">IMAGE · STRUCTURE</p><h3>图像与结构分析</h3></div>
-          <span class="group-count">3 个工具</span>
-        </header>
-        <div class="tool-grid">
-          <article class="tool-card featured" data-service="opt">
-            <div class="card-top"><span class="tool-index">01</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol optical-symbol"><i></i><i></i><i></i><i></i></div>
-            <p class="tool-type">OPTICAL MICROGRAPH</p>
-            <h3>OptCNT 光学图像分析</h3>
-            <p class="tool-description">光学显微镜 CNT 完整骨架分析：逐根测量、空间均匀性、团聚判定和 base / 实验组对比。</p>
-            <div class="tag-row"><span>完整分析</span><span>单图工作台</span><span>组间对比</span></div>
-            <a class="tool-link" href="https://opt-cnt.47.236.76.214.nip.io/?v=20260814-paste2" data-tool-link><span>打开分析台</span><b>↗</b></a>
-          </article>
-
-          <article class="tool-card" data-service="tem">
-            <div class="card-top"><span class="tool-index">02</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol tem-symbol"><span></span><span></span><span></span></div>
-            <p class="tool-type">TEM IMAGE ANALYSIS</p>
-            <h3>TEM CNT Analyzer</h3>
-            <p class="tool-description">TEM 图像结构识别与 ONNX 分析服务，适合纳米尺度的 CNT 图像处理与结果复核。</p>
-            <div class="tag-row"><span>TEM 图像</span><span>结构识别</span><span>在线 API</span></div>
-            <a class="tool-link" href="https://tem-cnt.47.236.76.214.nip.io/?v=20260814-paste" data-tool-link><span>打开分析台</span><b>↗</b></a>
-          </article>
-
-          <article class="tool-card" data-service="sem">
-            <div class="card-top"><span class="tool-index">03</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol sem-symbol"><i></i><i></i><i></i></div>
-            <p class="tool-type">SEM IMAGE ANALYSIS</p>
-            <h3>SEM CNT Analyzer</h3>
-            <p class="tool-description">SEM 图像碳纳米管管径统计：比例尺自动识别、ROI 选区、Otsu + 分水岭经典算法，直方图与正态拟合。</p>
-            <div class="tag-row"><span>SEM 图像</span><span>管径统计</span><span>CSV 导出</span></div>
-            <a class="tool-link" href="https://sem.47.236.76.214.nip.io/?v=20260821" data-tool-link><span>打开分析台</span><b>↗</b></a>
-          </article>
-        </div>
-      </div><div class="tool-group">
-        <header class="group-heading">
-          <div><p class="eyebrow">PARTICLE · SPECTRUM</p><h3>粒度与光谱</h3></div>
-          <span class="group-count">3 个工具</span>
-        </header>
+      <section class="tool-group" id="spectrum-tools" aria-labelledby="spectrum-title">
+        <header class="group-heading"><div><p class="eyebrow">PARTICLE & SPECTRUM</p><h2 id="spectrum-title">粒度与光谱</h2></div><p>从分布与谱峰中提取材料信息。</p></header>
         <div class="tool-grid">
           <article class="tool-card" data-service="grain">
-            <div class="card-top"><span class="tool-index">04</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol grain-symbol"><i></i><i></i><i></i><i></i></div>
-            <p class="tool-type">PARTICLE SIZE DECONVOLUTION</p>
-            <h3>GrainPeak 粒度分峰</h3>
-            <p class="tool-description">粒度分布多峰拟合，支持高斯、偏斜高斯和伪沃伊特模型，输出峰参数、R²、RMSE 与面积占比。</p>
-            <div class="tag-row"><span>多峰拟合</span><span>粒度分布</span><span>CSV 导出</span></div>
-            <a class="tool-link" href="https://grain-peak.47.236.76.214.nip.io/" data-tool-link><span>打开分峰台</span><b>↗</b></a>
+            <div class="card-top"><span class="tool-index">05</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon warm-icon" aria-hidden="true">PSD</span><p class="tool-type">PARTICLE SIZE DECONVOLUTION</p><h3>GrainPeak 粒度分峰</h3><p class="tool-description">粒度分布多峰拟合，输出峰参数、拟合优度和面积占比。</p><div class="tag-row"><span>多峰拟合</span><span>CSV 导出</span></div><a class="tool-link" href="https://grain-peak.47.236.76.214.nip.io/"><span>打开分峰台</span><b aria-hidden="true">↗</b></a>
           </article>
-
           <article class="tool-card" data-service="uv">
-            <div class="card-top"><span class="tool-index">05</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol uv-symbol"><i></i></div>
-            <p class="tool-type">UV–VIS SPECTRUM</p>
-            <h3>UV 光谱积分工作台</h3>
-            <p class="tool-description">多光谱叠加、拖拽选区、线性基线扣除与峰面积对比；全部计算在浏览器内完成。</p>
-            <div class="tag-row"><span>UV–Vis</span><span>峰面积</span><span>本地计算</span></div>
-            <a class="tool-link" href="https://uv-spectrum.47.236.76.214.nip.io/" data-tool-link><span>打开光谱台</span><b>↗</b></a>
+            <div class="card-top"><span class="tool-index">06</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon warm-icon" aria-hidden="true">UV</span><p class="tool-type">UV–VIS SPECTRUM</p><h3>UV 光谱积分</h3><p class="tool-description">多光谱叠加、线性基线扣除与峰面积对比，全部计算在浏览器内完成。</p><div class="tag-row"><span>峰面积</span><span>本地计算</span></div><a class="tool-link" href="https://uv-spectrum.47.236.76.214.nip.io/"><span>打开光谱台</span><b aria-hidden="true">↗</b></a>
           </article>
-
           <article class="tool-card" data-service="raman">
-            <div class="card-top"><span class="tool-index">06</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol raman-symbol"><i></i><i></i><i></i></div>
-            <p class="tool-type">CNT RAMAN SPECTROSCOPY</p>
-            <h3>RamanFit Pro</h3>
-            <p class="tool-description">RBM、D 带与 G 带自动检测拟合，并给出直径、候选手性、M/S 比、G/D 比和 CNT 类型。</p>
-            <div class="tag-row"><span>拉曼拟合</span><span>RBM 手性</span><span>CNT 判定</span></div>
-            <a class="tool-link" href="https://raman.47.236.76.214.nip.io/" data-tool-link><span>打开拉曼台</span><b>↗</b></a>
+            <div class="card-top"><span class="tool-index">07</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon warm-icon" aria-hidden="true">R</span><p class="tool-type">RAMAN SPECTROSCOPY</p><h3>RamanFit Pro</h3><p class="tool-description">RBM、D 带与 G 带检测拟合，分析直径、候选手性及碳管类型。</p><div class="tag-row"><span>拉曼拟合</span><span>RBM 手性</span></div><a class="tool-link" href="https://raman.47.236.76.214.nip.io/"><span>打开拉曼台</span><b aria-hidden="true">↗</b></a>
           </article>
         </div>
-      </div><div class="tool-group">
-        <header class="group-heading">
-          <div><p class="eyebrow">PROPERTY · PROCESS</p><h3>性质预测与生产</h3></div>
-          <span class="group-count">2 个工具</span>
-        </header>
-        <div class="tool-grid">
+      </section>
+      <section class="tool-group" id="process-tools" aria-labelledby="process-title">
+        <header class="group-heading"><div><p class="eyebrow">PROPERTY & PROCESS</p><h2 id="process-title">性质与生产</h2></div><p>连接材料表征与工艺决策。</p></header>
+        <div class="tool-grid pair-grid">
           <article class="tool-card" data-service="bet">
-            <div class="card-top"><span class="tool-index">07</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol bet-symbol"><span></span><span></span><span></span><span></span><span></span></div>
-            <p class="tool-type">PROPERTY PREDICTION</p>
-            <h3>CNT‑BET 预测工作台</h3>
-            <p class="tool-description">BET、粉末电阻率、批量预测与反向设计，支持 MWCNT / SWCNT 结构或工艺模型。</p>
-            <div class="tag-row"><span>BET</span><span>电阻率</span><span>反向设计</span></div>
-            <a class="tool-link" href="https://47.236.76.214.nip.io/?v=20260814-paste" data-tool-link><span>打开预测台</span><b>↗</b></a>
+            <div class="card-top"><span class="tool-index">08</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon blue-icon" aria-hidden="true">BET</span><p class="tool-type">PROPERTY PREDICTION</p><h3>CNT-BET 预测工作台</h3><p class="tool-description">BET、粉末电阻率与反向设计，支持 MWCNT / SWCNT 结构或工艺模型。</p><div class="tag-row"><span>性质预测</span><span>反向设计</span></div><a class="tool-link" href="https://47.236.76.214.nip.io/?v=20260814-paste"><span>打开预测台</span><b aria-hidden="true">↗</b></a>
           </article>
-
-          <article class="tool-card protected" data-service="production">
-            <div class="card-top"><span class="tool-index">08</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol production-symbol"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <p class="tool-type">PRODUCTION INTELLIGENCE</p>
-            <h3>CNT 生产数据分析</h3>
-            <p class="tool-description">厂内生产数据版本、质量门禁、炉号排名、异常诊断与报表闭环。需要授权账号。</p>
-            <div class="tag-row"><span>登录保护</span><span>生产 KPI</span><span>质量门禁</span></div>
-            <a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/" data-tool-link><span>打开工作台</span><b>↗</b></a>
+          <article class="tool-card" data-service="production">
+            <div class="card-top"><span class="tool-index">09</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><span class="tool-icon blue-icon" aria-hidden="true">DATA</span><p class="tool-type">PRODUCTION INTELLIGENCE</p><h3>CNT 生产数据分析</h3><p class="tool-description">质量门禁、炉号排名、异常诊断与生产报表。使用时需要授权账号。</p><div class="tag-row"><span>授权访问</span><span>生产 KPI</span></div><a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/"><span>打开工作台</span><b aria-hidden="true">↗</b></a>
           </article>
-        </div>
-      </div>
-
-      <div class="tool-group">
-        <header class="group-heading">
-          <div><p class="eyebrow">SIMULATION DATABASE</p><h3>模拟数据库</h3></div>
-          <span class="group-count">1 个数据集</span>
-        </header>
-        <div class="tool-grid">
-          <article class="tool-card" data-service="furnace">
-            <div class="card-top"><span class="tool-index">09</span><span class="status-pill checking"><i></i><b>检查中</b></span></div>
-            <div class="tool-symbol simdb-symbol"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <p class="tool-type">SIMULATION DATA ARCHIVE</p>
-            <h3>仿真数据集归档</h3>
-            <p class="tool-description">各计算项目的仿真结果统一归档：工况组合、内部状态图、统计数据与完整性校验。当前收录 OC 炉管 CFD 参数扫描数据集，更多项目持续入库。</p>
-            <div class="tag-row"><span>统一入口</span><span>持续入库</span><span>校验清单</span></div>
-            <a class="tool-link" href="https://sim-db.47.236.76.214.nip.io/" data-tool-link><span>打开数据库</span><b>↗</b></a>
-          </article>
-        </div>
-      </div>
-      </section>
-
-      <section class="workflow-section">
-        <div class="shell workflow-inner">
-          <div class="workflow-copy"><p class="eyebrow">WORKFLOW MAP</p><h2>各司其职，形成材料数据闭环</h2><p>图像结构、粒度与光谱、材料性质和生产过程分别由对应工具负责；需要正式结论时，应保留原始数据、参数快照、模型版本与导出报告。</p></div>
-          <div class="workflow-flow">
-            <article><span>IMAGE</span><strong>OPT / SEM / TEM</strong><small>结构与分布</small></article>
-            <i>→</i>
-            <article><span>PARTICLE</span><strong>GRAINPEAK</strong><small>粒度与团聚</small></article>
-            <i>→</i>
-            <article><span>SPECTRUM</span><strong>UV / RAMAN</strong><small>光谱与手性</small></article>
-            <i>→</i>
-            <article><span>PROPERTY / PROCESS</span><strong>BET / PROD</strong><small>预测与决策</small></article>
-          </div>
         </div>
       </section>
-    </main>
-
-    <footer class="site-footer shell"><span>CNT LAB REMOTE TOOLBOX</span><span>远端入口只做导航，不存储跨工具数据</span></footer>
-    <script src="app.js" defer></script>
-  </body>
+      <section class="tool-group" id="simulation-tools" aria-labelledby="simulation-title">
+        <header class="group-heading"><div><p class="eyebrow">SIMULATION DATABASE</p><h2 id="simulation-title">模拟数据库</h2></div><p>归档计算证据，追溯每次仿真。</p></header>
+        <article class="tool-card archive-card" data-service="furnace">
+          <div class="card-top"><span class="tool-index">10</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="archive-body"><div><p class="tool-type">SIMULATION DATA ARCHIVE</p><h3>仿真数据集归档</h3><p class="tool-description">工况组合、内部状态图、统计数据与完整性校验统一归档。当前收录 OC 炉管 CFD 参数扫描数据集。</p></div><a class="tool-link" href="https://sim-db.47.236.76.214.nip.io/"><span>打开数据库</span><b aria-hidden="true">↗</b></a></div>
+        </article>
+      </section>
+      <p class="service-note">接口状态只反映本次浏览器检查；“待核验”可能由跨域限制或网络引起，不影响打开工具。各工作台独立运行，数据不会自动互通。</p>
+    </div>
+  </main>
+  <footer class="site-footer shell"><div><strong>CNT LAB</strong><span>碳管科学工具</span></div><p>保留原始数据，让每个结论都有依据。</p><a href="#top">回到顶部 ↑</a></footer>
+</body>
 </html>

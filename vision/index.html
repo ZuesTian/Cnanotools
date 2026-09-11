@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#f3f5f0" />
+  <meta name="description" content="用 DeepSeek 4.1 Flash 询问碳纳米管显微图像的分布、长度与宽度。" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src https://cnt-vision.47.236.76.214.nip.io; object-src 'none'; base-uri 'self'; form-action 'none'" />
+  <title>碳管视觉问答 · CNT Lab</title>
+  <link rel="icon" href="../assets/cnano-logo.png" />
+  <script src="../theme.js?v=20260813"></script>
+  <link rel="stylesheet" href="../theme.css?v=20260821b" />
+  <link rel="stylesheet" href="styles.css?v=20260911-viewer2" />
+  <script type="module" src="app.mjs?v=20260911-portal"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../"><img src="../assets/cnano-logo.png" alt="天奈科技" /><span>CNT LAB <small>视觉问答</small></span></a>
+    <nav aria-label="页面导航"><a class="back-link" href="../">返回门户 ↗</a><button class="theme-toggle" type="button" data-theme-toggle><span data-theme-icon aria-hidden="true">☾</span><span data-theme-label>深色</span></button></nav>
+  </header>
+  <main class="workspace">
+    <div class="page-heading"><div><p class="eyebrow">CNT VISION / 图像理解</p><h1>让碳管图像，回答你的问题。</h1><p class="subtitle">上传显微图像，询问分布、长度与宽度。</p></div></div>
+    <div class="work-grid">
+      <section class="image-panel panel" aria-labelledby="image-heading">
+        <div class="panel-heading"><h2 id="image-heading"><span class="step">01</span> 样品图像</h2><button id="removeImage" class="text-button" type="button" disabled>移除图像</button></div>
+        <div class="viewer-toolbar" aria-label="图像显示控制">
+          <div class="zoom-controls"><button id="zoomOut" type="button" aria-label="缩小图像" disabled>−</button><output id="zoomValue" aria-label="图像缩放比例">—</output><button id="zoomIn" type="button" aria-label="放大图像" disabled>＋</button><button id="fitImage" type="button" disabled>适应</button><button id="actualSize" type="button" disabled>1:1</button></div>
+          <label class="enhance-control"><input id="enhanceImage" type="checkbox" disabled />增强对比</label>
+        </div>
+        <div id="dropZone" class="image-stage">
+          <div id="uploadEmpty" class="upload-empty">
+            <svg class="upload-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="5" y="7" width="38" height="34" rx="5" stroke="currentColor" stroke-width="1.5"/><path d="M9 34l10-11 7 7 6-6 7 10M31 15h6m-3-3v6" stroke="currentColor" stroke-width="1.5"/></svg>
+            <h3>把显微图像放在这里</h3><p>拖入文件，或按 Ctrl / ⌘ + V 粘贴图片</p>
+            <button id="chooseImage" type="button" class="primary">选择图像</button>
+            <p class="file-hint">PNG / JPG / WebP · 最大 12 MB · 每边不超过 8192 px</p>
+          </div>
+          <canvas id="imageCanvas" tabindex="0" role="img" aria-label="碳管图像及标尺。滚轮缩放，拖动平移；标定模式可选择或拖动端点，A/B 键选端点，方向键微调，空格加拖动平移。" aria-describedby="viewerHint pickScaleNote" hidden>请使用支持 Canvas 的浏览器，或手动填写原图标尺像素长度。</canvas>
+          <div id="viewerStatus" class="viewer-status" hidden>浏览图像</div>
+        </div>
+        <input id="imageFile" type="file" accept="image/png,image/jpeg,image/webp" hidden />
+        <div class="image-caption"><span id="imageInfo" role="status">尚未选择图像</span><span>保留原图分辨率</span></div>
+        <p id="viewerHint" class="viewer-hint">滚轮缩放 · 拖动平移 · 标定时空格 + 拖动平移。增强对比仅改变显示，不修改上传原图。</p>
+        <fieldset id="sampleFields" class="sample-fields">
+          <legend>图像与标尺</legend>
+          <label>图像类型<select id="imageType"><option value="未指定">自动判断</option><option value="TEM">TEM 透射电镜</option><option value="SEM">SEM 扫描电镜</option><option value="光学显微镜">光学显微镜</option></select></label>
+          <div class="scale-heading"><span>尺寸标定 <small>可选</small></span><span id="scaleState" class="scale-state">未标定</span></div>
+          <div class="scale-picker-actions"><button id="pickScale" type="button" class="secondary" aria-pressed="false" aria-describedby="pickScaleNote" disabled>点选标尺两端</button><button id="cancelScale" type="button" class="text-button" hidden>取消修改</button><button id="clearScale" type="button" class="text-button" disabled>清除标定</button></div>
+          <p id="pickScaleNote" class="field-note scale-picker-note" role="status">先放大标尺，再点选两端；完成后填写实际长度和单位，点击“应用标定”。</p>
+          <div class="scale-row"><label>原图像素长度<input id="scalePixels" type="number" min="0" step="any" placeholder="点两端自动填写" inputmode="decimal" /></label><span class="equals">=</span><label>标尺实际长度<input id="scaleLength" type="number" min="0" step="any" placeholder="例如 10" inputmode="decimal" /></label><label class="unit-label">单位<select id="scaleUnit"><option value="">选择</option><option value="nm">nm</option><option value="µm">µm</option></select></label></div>
+          <div class="calibration-result"><strong id="scaleEquation">未设置标尺</strong><p id="scaleNote">例如图中标尺为 10 µm：填入 10，并明确选择 µm。</p></div>
+          <button id="applyScale" type="button" class="primary apply-scale" disabled>应用标定</button>
+        </fieldset>
+      </section>
+      <section class="chat-panel panel" aria-labelledby="chat-heading">
+        <div class="panel-heading"><h2 id="chat-heading"><span class="step">02</span> 视觉问答</h2><button id="clearChat" type="button" class="text-button" disabled>清空对话</button></div>
+        <details id="connection" class="connection">
+          <summary><span>模型与连接设置</span><span id="connectionState">由门户统一管理</span></summary>
+          <div class="connection-fields"><label>默认模型<select id="model" disabled><option value="deepseek-flash">DeepSeek 4.1 Flash（4.1f）</option></select></label><label>API Key<input type="text" value="服务端托管 · 无需填写" readonly /></label><p class="field-note">密钥不下发到浏览器。共享服务设有频率和每日调用上限。</p></div>
+        </details>
+        <div id="messages" class="messages" role="log" aria-label="问答记录" aria-live="polite" aria-relevant="additions text">
+          <div id="chatEmpty" class="chat-empty"><span class="assistant-mark" aria-hidden="true">V</span><h3>从你关心的结构开始</h3><p>哪里团聚？长度是否均匀？看到的是单管，还是管束？</p><div class="question-chips"><button type="button" data-question="distribution"><strong>分布</strong><span>均匀性、团聚与取向 ↗</span></button><button type="button" data-question="length"><strong>长度</strong><span>可见长度与截断情况 ↗</span></button><button type="button" data-question="width"><strong>宽度</strong><span>单管管径与管束宽度 ↗</span></button></div></div>
+        </div>
+        <div class="composer-wrap">
+          <p id="feedback" class="feedback" role="status" hidden></p>
+          <form id="questionForm"><label class="sr-only" for="question">向模型提问</label><textarea id="question" rows="3" maxlength="6000" placeholder="例如：这张图中的碳管分布均匀吗？请估算可辨认碳管的长度和宽度，并说明依据。"></textarea><div class="composer-actions"><span id="sendHint">先选择一张图像</span><button id="stopRequest" class="secondary" type="button" hidden>停止</button><button id="sendQuestion" class="primary" type="submit" disabled>发送问题 ↑</button></div></form>
+          <p class="disclosure">点击发送后，图像、标尺信息和本轮对话经门户服务转发至 DeepSeek；门户不保存图像或对话。视觉估算不等同于逐根测量，精确统计请使用 <a href="https://tem-cnt.47.236.76.214.nip.io/">TEM</a> / <a href="https://sem.47.236.76.214.nip.io/">SEM 分析台</a>。</p>
+        </div>
+      </section>
+    </div>
+    <footer><span>CNT LAB · VISION WORKSPACE</span><span>先观察，再测量。</span></footer>
+  </main>
+  <noscript>请启用 JavaScript 以选择图像并使用视觉问答。</noscript>
+</body>
+</html>

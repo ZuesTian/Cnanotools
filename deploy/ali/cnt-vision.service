@@ -1,0 +1,27 @@
+[Unit]
+Description=CNT vision gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cntvision
+Group=cntvision
+WorkingDirectory=/opt/cnt-vision/current
+Environment=PYTHONUNBUFFERED=1
+Environment=VISION_KEY_FILE=/etc/cnt-vision/deepseek.key
+Environment=VISION_STATE_DIR=/var/lib/cnt-vision
+Environment=VISION_DAILY_LIMIT=200
+ExecStart=/opt/science-tools/.venv/bin/gunicorn vision_api:create_app() --bind 127.0.0.1:8780 --workers 1 --threads 4 --timeout 150 --access-logfile - --error-logfile -
+Restart=on-failure
+RestartSec=3
+StateDirectory=cnt-vision
+StateDirectoryMode=0750
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

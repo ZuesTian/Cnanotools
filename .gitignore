@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+_site/
+.env
+.env.*
+*.key
+*.pem
+*.sqlite3

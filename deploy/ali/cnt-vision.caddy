@@ -1,0 +1,14 @@
+cnt-vision.47.236.76.214.nip.io {
+    encode zstd gzip
+    request_body {
+        max_size 18MB
+    }
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy no-referrer
+        X-Frame-Options DENY
+    }
+    reverse_proxy 127.0.0.1:8780 {
+        header_up X-Real-IP {remote_host}
+    }
+}
