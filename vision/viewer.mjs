@@ -1,4 +1,4 @@
-import { getImageTransform, viewportToImagePoint, imageToViewportPoint } from "./core.mjs?v=20260911-viewer2";
+import { getImageTransform, viewportToImagePoint, imageToViewportPoint } from "./core.mjs?v=20260911-neutral";
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const copyPoints = (points) => points.map((point) => ({ ...point }));

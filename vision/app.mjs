@@ -1,5 +1,5 @@
-import { MAX_BYTES, QUESTIONS, getScale, scaleMatches, measurePixelDistance, detectImageType, buildRequest, requestAnswer } from "./core.mjs?v=20260911-portal";
-import { ImageViewer } from "./viewer.mjs?v=20260911-viewer2";
+import { MAX_BYTES, QUESTIONS, getScale, scaleMatches, measurePixelDistance, detectImageType, buildRequest, requestAnswer } from "./core.mjs?v=20260911-neutral";
+import { ImageViewer } from "./viewer.mjs?v=20260911-neutral";
 
 const $ = (id) => document.getElementById(id);
 let image = null;
@@ -104,7 +104,7 @@ function appendMessage(role, content, pending = false) {
   article.className = `message ${role}${pending ? " pending" : ""}`;
   const heading = document.createElement("div");
   heading.className = "message-role";
-  heading.textContent = role === "user" ? "你" : "DeepSeek 4.1 Flash";
+  heading.textContent = role === "user" ? "你" : "碳管视觉助手";
   const body = document.createElement("div");
   body.className = "message-body";
   body.textContent = content;
@@ -274,7 +274,6 @@ $("questionForm").addEventListener("submit", async (event) => {
   activeRequest = controller;
   let timedOut = false;
   const timeout = setTimeout(() => { timedOut = true; controller.abort(); }, 120000);
-  $("connection").open = false;
   sync();
   try {
     const answer = await requestAnswer({ payload, signal: controller.signal });

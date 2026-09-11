@@ -2,15 +2,14 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { getScale, getImageTransform, viewportToImagePoint, imageToViewportPoint, scaleMatches, measurePixelDistance, detectImageType, buildRequest, requestAnswer, MODEL, API_URL, QUESTIONS } from "../vision/core.mjs";
+import { getScale, getImageTransform, viewportToImagePoint, imageToViewportPoint, scaleMatches, measurePixelDistance, detectImageType, buildRequest, requestAnswer, API_URL, QUESTIONS } from "../vision/core.mjs";
 
 const image = { width: 1024, height: 768, dataUrl: "data:image/png;base64,TEST_ONLY" };
 const input = { image, imageType: "TEM", scale: null, history: [], question: "分布均匀吗？" };
 
-test("default maps 4.1 Flash to the official vision model; preserves original image and question", () => {
+test("request preserves original image and question without exposing model selection", () => {
   const payload = buildRequest(input);
-  assert.equal(MODEL, "deepseek-flash");
-  assert.equal(payload.model, MODEL);
+  assert.deepEqual(Object.keys(payload), ["messages"]);
   assert.equal(payload.messages[0].content[1].image_url.url, image.dataUrl);
   assert.equal(payload.messages[0].content[1].image_url.detail, "original");
   assert.equal(payload.messages.at(-1).content, input.question);
@@ -146,9 +145,13 @@ test("page references and IDs resolve; no application persistence or unsafe HTML
   }
   assert.doesNotMatch(app, /innerHTML|localStorage|sessionStorage|console\./);
   assert.match(html, /connect-src https:\/\/cnt-vision.47.236.76.214.nip.io/);
-  assert.match(html, /<details id="connection" class="connection">/);
+  assert.doesNotMatch(html, /id="connection"/);
   assert.doesNotMatch(html, /id="apiKey"/);
-  assert.match(html, /value="deepseek-flash"/);
+  assert.doesNotMatch(html, /id="model"/);
+  for (const file of ["index.html", "app.mjs", "core.mjs", "viewer.mjs", "styles.css"]) {
+    assert.doesNotMatch(readFileSync(new URL(`../vision/${file}`, import.meta.url), "utf8"), /deepseek|4\.1\s*flash/i);
+  }
+  assert.match(app, /碳管视觉助手/);
   const portal = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   assert.match(portal, /href="vision\/"/);
   const indexes = [...portal.matchAll(/class="tool-index">(\d+)/g)].map((match) => Number(match[1]));

@@ -38,8 +38,8 @@ def send_upstream(payload, key):
 
 
 def normalize_payload(data):
-    if not isinstance(data, dict) or data.get("model") != MODEL:
-        raise ValueError("Invalid model")
+    if not isinstance(data, dict):
+        raise ValueError("Invalid request")
     messages = data.get("messages")
     if not isinstance(messages, list) or not 2 <= len(messages) <= 64:
         raise ValueError("Invalid conversation")
@@ -117,7 +117,7 @@ def create_app(key_file=None, state_dir=None, forward=None):
 
     @app.get("/api/health")
     def health():
-        return jsonify(status="ok", model=MODEL) if key else (jsonify(status="unavailable"), 503)
+        return jsonify(status="ok") if key else (jsonify(status="unavailable"), 503)
 
     @app.route("/api/chat", methods=["POST", "OPTIONS"])
     def chat():
@@ -158,7 +158,7 @@ def create_app(key_file=None, state_dir=None, forward=None):
             content = choice["message"]["content"]
             if not isinstance(content, str) or not content.strip():
                 raise ValueError("Empty response")
-            return jsonify(model=MODEL, choices=[{"message": {"role": "assistant", "content": content}, "finish_reason": "length" if choice.get("finish_reason") == "length" else "stop"}])
+            return jsonify(choices=[{"message": {"role": "assistant", "content": content}, "finish_reason": "length" if choice.get("finish_reason") == "length" else "stop"}])
         except urllib.error.HTTPError as error:
             status = error.code if error.code in (400, 401, 402, 403, 413, 422, 429) else 502
             return jsonify(code="upstream_error"), status

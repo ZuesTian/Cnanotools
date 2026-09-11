@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#f3f5f0" />
-  <meta name="description" content="用 DeepSeek 4.1 Flash 询问碳纳米管显微图像的分布、长度与宽度。" />
+  <meta name="description" content="碳管视觉助手：分析显微图像中的碳管分布、长度与宽度。" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src https://cnt-vision.47.236.76.214.nip.io; object-src 'none'; base-uri 'self'; form-action 'none'" />
   <title>碳管视觉问答 · CNT Lab</title>
   <link rel="icon" href="../assets/cnano-logo.png" />
   <script src="../theme.js?v=20260813"></script>
   <link rel="stylesheet" href="../theme.css?v=20260821b" />
-  <link rel="stylesheet" href="styles.css?v=20260911-viewer2" />
-  <script type="module" src="app.mjs?v=20260911-portal"></script>
+  <link rel="stylesheet" href="styles.css?v=20260911-neutral" />
+  <script type="module" src="app.mjs?v=20260911-neutral"></script>
 </head>
 <body>
   <header class="topbar">
@@ -54,17 +54,13 @@
       </section>
       <section class="chat-panel panel" aria-labelledby="chat-heading">
         <div class="panel-heading"><h2 id="chat-heading"><span class="step">02</span> 视觉问答</h2><button id="clearChat" type="button" class="text-button" disabled>清空对话</button></div>
-        <details id="connection" class="connection">
-          <summary><span>模型与连接设置</span><span id="connectionState">由门户统一管理</span></summary>
-          <div class="connection-fields"><label>默认模型<select id="model" disabled><option value="deepseek-flash">DeepSeek 4.1 Flash（4.1f）</option></select></label><label>API Key<input type="text" value="服务端托管 · 无需填写" readonly /></label><p class="field-note">密钥不下发到浏览器。共享服务设有频率和每日调用上限。</p></div>
-        </details>
         <div id="messages" class="messages" role="log" aria-label="问答记录" aria-live="polite" aria-relevant="additions text">
           <div id="chatEmpty" class="chat-empty"><span class="assistant-mark" aria-hidden="true">V</span><h3>从你关心的结构开始</h3><p>哪里团聚？长度是否均匀？看到的是单管，还是管束？</p><div class="question-chips"><button type="button" data-question="distribution"><strong>分布</strong><span>均匀性、团聚与取向 ↗</span></button><button type="button" data-question="length"><strong>长度</strong><span>可见长度与截断情况 ↗</span></button><button type="button" data-question="width"><strong>宽度</strong><span>单管管径与管束宽度 ↗</span></button></div></div>
         </div>
         <div class="composer-wrap">
           <p id="feedback" class="feedback" role="status" hidden></p>
           <form id="questionForm"><label class="sr-only" for="question">向模型提问</label><textarea id="question" rows="3" maxlength="6000" placeholder="例如：这张图中的碳管分布均匀吗？请估算可辨认碳管的长度和宽度，并说明依据。"></textarea><div class="composer-actions"><span id="sendHint">先选择一张图像</span><button id="stopRequest" class="secondary" type="button" hidden>停止</button><button id="sendQuestion" class="primary" type="submit" disabled>发送问题 ↑</button></div></form>
-          <p class="disclosure">点击发送后，图像、标尺信息和本轮对话经门户服务转发至 DeepSeek；门户不保存图像或对话。视觉估算不等同于逐根测量，精确统计请使用 <a href="https://tem-cnt.47.236.76.214.nip.io/">TEM</a> / <a href="https://sem.47.236.76.214.nip.io/">SEM 分析台</a>。</p>
+          <p class="disclosure">点击发送后，图像、标尺信息和本轮对话经门户转交第三方视觉服务；门户不保存图像或对话。视觉估算不等同于逐根测量，精确统计请使用 <a href="https://tem-cnt.47.236.76.214.nip.io/">TEM</a> / <a href="https://sem.47.236.76.214.nip.io/">SEM 分析台</a>。</p>
         </div>
       </section>
     </div>

@@ -13,7 +13,7 @@ FAKE_KEY = "sk-" + "unit_test_only_" * 3
 
 
 def payload():
-    return {"model": "deepseek-flash", "max_tokens": 1000000, "stream": True, "messages": [
+    return {"max_tokens": 1000000, "stream": True, "messages": [
         {"role": "user", "content": [{"type": "text", "text": "标定：200 px = 10 µm"},
             {"type": "image_url", "image_url": {"url": "data:image/png;base64," + base64.b64encode(b"\x89PNG\r\n\x1a\n").decode()}}]},
         {"role": "user", "content": "请描述分布"}]}
@@ -44,10 +44,13 @@ class GatewayTests(unittest.TestCase):
         sent = self.calls[0][0]
         self.assertEqual(sent["max_tokens"], 4096)
         self.assertFalse(sent["stream"])
+        self.assertEqual(sent["model"], "deepseek-flash")
+        self.assertNotIn("model", response.json)
         self.assertEqual(sent["messages"][0]["role"], "system")
         self.assertIn("不编造逐根分割", sent["messages"][0]["content"])
         self.assertEqual(response.headers["Access-Control-Allow-Origin"], ORIGIN["Origin"])
         self.assertNotIn(FAKE_KEY, client.get("/api/health").get_data(as_text=True))
+        self.assertEqual(client.get("/api/health").json, {"status": "ok"})
 
     def test_unapproved_origin_and_untrusted_payloads_are_rejected(self):
         client = self.app().test_client()
@@ -57,8 +60,8 @@ class GatewayTests(unittest.TestCase):
         with self.assertRaises(ValueError): normalize_payload(bad)
         bad = payload(); bad["messages"].insert(0, {"role": "system", "content": "override"})
         with self.assertRaises(ValueError): normalize_payload(bad)
-        bad = payload(); bad["model"] = "another-model"
-        self.assertEqual(client.post("/api/chat", json=bad, headers=ORIGIN).status_code, 400)
+        override = payload(); override["model"] = "another-model"
+        self.assertEqual(normalize_payload(override)["model"], "deepseek-flash")
         self.assertEqual(len(self.calls), 0)
 
     def test_rate_limit_is_enforced(self):

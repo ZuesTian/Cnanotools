@@ -1,4 +1,3 @@
-export const MODEL = "deepseek-flash";
 export const API_URL = "https://cnt-vision.47.236.76.214.nip.io/api/chat";
 export const MAX_BYTES = 12 * 1024 * 1024;
 export const QUESTIONS = {
@@ -65,10 +64,6 @@ export function buildRequest({ image, imageType, scale, history, question }) {
     ? `用户标定：原图 ${scale.pixels} px = ${scale.length} ${scale.unit}；每像素 ${scale.perPixel} ${scale.unit}。`
     : "用户未提供像素标定。若图中标尺无法可靠辨认，请勿报告绝对尺寸。";
   return {
-    model: MODEL,
-    stream: false,
-    thinking: { type: "disabled" },
-    max_tokens: 4096,
     messages: [
       { role: "user", content: [
         { type: "text", text: `待分析图像：${image.width} × ${image.height} px。用户选择图像类型：${imageType}。${calibration}` },
@@ -82,12 +77,12 @@ export function buildRequest({ image, imageType, scale, history, question }) {
 
 export function apiError(status) {
   if (status === 401) return "视觉服务的密钥无效或已失效，请联系管理员。";
-  if (status === 402) return "共享 DeepSeek 账户余额不足，请联系管理员。";
+  if (status === 402) return "视觉服务账户余额不足，请联系管理员。";
   if (status === 403) return "视觉服务没有调用权限，请联系管理员。";
   if (status === 413) return "图像请求过大，请选择更小的图像。";
   if (status === 429) return "请求过于频繁，或额度受限，请稍后重试。";
   if (status === 400 || status === 422) return "模型未接受本次图像请求，请检查图像格式、尺寸和模型权限。";
-  if (status >= 500) return "DeepSeek 服务暂不可用，请稍后重试。";
+  if (status >= 500) return "视觉服务暂不可用，请稍后重试。";
   return `请求失败（HTTP ${status}），请检查连接后重试。`;
 }
 
