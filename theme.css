@@ -1,3 +1,7 @@
+/* CNT Lab 主题层：颜色变量、深色模式覆盖、品牌资产与状态语义色。
+   组件的尺寸与布局由各项目的 styles.css 负责，此处不重复定义，
+   避免同一选择器被两个文件分段覆盖。 */
+
 :root {
   color-scheme: light;
   --ink: #17322e;
@@ -11,7 +15,7 @@
   --surface: #ffffff;
   --surface-soft: #edf2ee;
   --line: #d8e1dc;
-  --muted: #5f736d;
+  --muted: #55685f;
   --quiet: #81918c;
   --shadow: 0 24px 70px rgba(17, 50, 44, .11);
 }
@@ -43,62 +47,78 @@ body {
 }
 
 .site-header { position: relative; z-index: 10; }
-.header-actions { display: flex; align-items: center; gap: 10px; }
+
+/* 主题开关：门户与 vision 页面共用同一段 DOM，样式集中在此处，
+   不在各页面 styles.css 里重复定义。 */
 .theme-toggle {
   display: inline-flex;
-  min-height: 38px;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 0 12px;
+  min-height: 44px;
+  padding-inline: 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
   background: color-mix(in srgb, var(--surface) 82%, transparent);
   box-shadow: 0 5px 18px rgba(16, 45, 40, .05);
-  cursor: pointer;
-  font: 750 9px/1 Inter, "Segoe UI", sans-serif;
+  font: 750 14px/1 Inter, "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
   transition: .2s ease;
 }
 .theme-toggle:hover { color: var(--teal); border-color: color-mix(in srgb, var(--teal) 40%, var(--line)); transform: translateY(-1px); }
-.theme-toggle__icon { display: grid; width: 18px; height: 18px; place-items: center; font-size: 13px; }
-.header-status { color: var(--muted); border-color: var(--line); background: color-mix(in srgb, var(--surface) 82%, transparent); }
-.brand-divider, .hero-meta, .hero-meta div { border-color: var(--line); }
+.theme-toggle [data-theme-icon] { display: grid; width: 18px; height: 18px; place-items: center; font-size: 13px; }
 
-.tool-card { border-color: var(--line); background: var(--surface); }
-.tool-card.featured { color: #f2faf6; background: var(--deep); }
-.tool-card.featured .tool-description { max-width: 72%; }
-.tool-card::after { border-color: color-mix(in srgb, var(--teal) 7%, transparent); }
-.tool-card:hover { border-color: color-mix(in srgb, var(--teal) 35%, var(--line)); }
-.tool-description { color: var(--muted); }
-.tag-row span { color: var(--muted); background: var(--surface-soft); }
-.tool-link { color: var(--teal); border-color: var(--line); background: var(--surface); }
-.tool-link:hover { color: var(--deep); border-color: var(--lime); background: var(--lime); }
-.featured .tool-link { color: #0c302c; background: var(--lime); }
-.status-pill.online { color: #35704e; background: #e7f3e9; }
-.status-pill.checking { color: #8a641f; background: #fff3da; }
+@media (max-width: 680px) {
+  .theme-toggle { padding-inline: 12px; gap: 6px; }
+  .theme-toggle [data-theme-label] { font-size: 12px; }
+}
+
+@media (max-width: 340px) {
+  .theme-toggle { width: 44px; padding: 0; gap: 0; }
+  .theme-toggle [data-theme-label] { display: none; }
+}
+
+/* 接口状态三态色。中性态由 styles.css 提供，
+   这里只补语义色，避免两边同时定义 checking。 */
+.status-pill.online { color: #2f6244; background: #e7f3e9; }
+.status-pill.checking { color: #7a5518; background: #fff3da; }
 .status-pill.offline { color: #9e4436; background: #fff0eb; }
 
-:root[data-theme="dark"] .cnano-logo { filter: brightness(1.08) saturate(.9); }
-:root[data-theme="dark"] .data-label { color: var(--quiet); border-color: var(--line); background: rgba(16, 39, 36, .88); }
-:root[data-theme="dark"] .tool-symbol { filter: saturate(.9) brightness(.9); }
-:root[data-theme="dark"] .tool-card:not(.featured) .tool-link { background: var(--surface-soft); }
+/* 品牌标识：logo 的 "nano" 字为深灰，深色页面上不可读，
+   给它一块浅色底片而不是用滤镜，以免破坏品牌绿。
+   门户用 .cnano-logo，vision 页面用 .brand img，两者共用同一张图。 */
+:root[data-theme="dark"] .cnano-logo,
+:root[data-theme="dark"] .brand img {
+  background: #f2f6f2;
+  border-radius: 7px;
+  padding: 3px 5px;
+}
+
+/* VISION 节点在浅色下是白底空心圆，深色下会变成几乎看不见的轮廓，
+   与另外三个实心节点失衡；给它一个实心深青底。 */
+:root[data-theme="dark"] .node-vision { color: #d6f2ea; background: #1d423c; }
+
 :root[data-theme="dark"] .status-pill.online { color: #9fe1b3; background: rgba(86, 174, 113, .14); }
 :root[data-theme="dark"] .status-pill.checking { color: #f2ca7b; background: rgba(235, 168, 73, .14); }
 :root[data-theme="dark"] .status-pill.offline { color: #ffab9c; background: rgba(237, 116, 92, .14); }
-:root[data-theme="dark"] .workflow-section { background: #061816; }
-:root[data-theme="dark"] .workflow-flow article { background: rgba(255, 255, 255, .045); }
 
-.theme-toggle:focus-visible { outline: 3px solid color-mix(in srgb, var(--teal) 30%, transparent); outline-offset: 3px; }
-
-@media (max-width: 1100px) {
-  .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 700px) {
-  .header-actions { gap: 6px; }
-  .theme-toggle { width: 38px; justify-content: center; padding: 0; }
-  .theme-toggle [data-theme-label] { display: none; }
-  .header-status { padding-inline: 10px; }
-  .tool-grid { grid-template-columns: 1fr; }
-  .tool-card.featured .tool-description { max-width: none; }
-}
+/* 工具图标的浅色底在深色页面上会盖过标题，成为最亮的元素。
+   深色模式下换成深底浅图形，让图标退回它应有的层级。 */
+:root[data-theme="dark"] .optical-symbol { background: #2a3618; }
+:root[data-theme="dark"] .optical-symbol i { background: #b5d96a; }
+:root[data-theme="dark"] .tem-symbol { background: #3a2620; }
+:root[data-theme="dark"] .tem-symbol span { background: #f0917c; }
+:root[data-theme="dark"] .sem-symbol { background: #1e2c38; }
+:root[data-theme="dark"] .sem-symbol i { border-color: #7aa8c8; }
+:root[data-theme="dark"] .sem-symbol i:nth-child(2) { border-color: #7aa8c8; }
+:root[data-theme="dark"] .sem-symbol i:nth-child(3) { background: #7aa8c8; }
+:root[data-theme="dark"] .grain-symbol { background: #2a2540; }
+:root[data-theme="dark"] .grain-symbol i { background: #a99ae0; }
+:root[data-theme="dark"] .uv-symbol { background: linear-gradient(145deg, #25301d, #2d2437); }
+:root[data-theme="dark"] .uv-symbol i { background: linear-gradient(150deg, transparent 0 27%, #6fb89b 28% 33%, transparent 34% 48%, #d987ad 49% 55%, transparent 56%); }
+:root[data-theme="dark"] .raman-symbol { background: #1d2e3a; }
+:root[data-theme="dark"] .raman-symbol i { background: #7aa9c4; }
+:root[data-theme="dark"] .bet-symbol { background: #332b1a; }
+:root[data-theme="dark"] .bet-symbol span { background: #e0b463; }
+:root[data-theme="dark"] .production-symbol { background: #222c34; }
+:root[data-theme="dark"] .production-symbol i { background: #8fa8bd; }

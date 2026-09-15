@@ -16,9 +16,10 @@
   const syncControls = (theme) => {
     const nextLabel = theme === "dark" ? "浅色" : "深色";
     document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+      // 按钮文字与标签描述的都是"点击后切换到哪个主题"，属于动作语义，
+      // 因此不再设置 aria-pressed——那会用当前状态去描述同一个控件。
       button.setAttribute("aria-label", `切换到${nextLabel}模式`);
       button.setAttribute("title", `切换到${nextLabel}模式`);
-      button.setAttribute("aria-pressed", String(theme === "dark"));
       const icon = button.querySelector("[data-theme-icon]");
       const label = button.querySelector("[data-theme-label]");
       if (icon) icon.textContent = theme === "dark" ? "☀" : "☾";
