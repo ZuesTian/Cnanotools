@@ -15,6 +15,7 @@
 | 粒度与光谱 | GrainPeak | [打开](https://grain-peak.47.236.76.214.nip.io/) | [GrainPeak](https://github.com/ZuesTian/GrainPeak) |
 | 粒度与光谱 | UV 光谱积分 | [打开](https://uv-spectrum.47.236.76.214.nip.io/) | [UV](https://github.com/ZuesTian/UV) |
 | 粒度与光谱 | RamanFit Pro | [打开](https://raman.47.236.76.214.nip.io/) | — |
+| 粒度与光谱 | CNT-XRD 碳材料衍射分析 | [打开](https://cnt-xrd.47.236.76.214.nip.io/) | — |
 | 性质与生产 | CNT-BET | [打开](https://47.236.76.214.nip.io/) | [静态前端](https://github.com/ZuesTian/cnt-bet-workbench) |
 | 性质与生产 | CNT 生产数据分析 | [打开](https://cnt-analysis.47.236.76.214.nip.io/) | [cnt-production-analysis](https://github.com/ZuesTian/cnt-production-analysis) |
 | 模拟数据 | 仿真数据集归档 | [打开](https://sim-db.47.236.76.214.nip.io/) | — |

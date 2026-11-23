@@ -155,5 +155,8 @@ test("page references and IDs resolve; no application persistence or unsafe HTML
   const portal = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   assert.match(portal, /href="vision\/"/);
   const indexes = [...portal.matchAll(/class="tool-index">(\d+)/g)].map((match) => Number(match[1]));
-  assert.deepEqual(indexes, [1,2,3,4,5,6,7,8,9,10]);
+  assert.deepEqual(indexes, [1,2,3,4,5,6,7,8,9,10,11]);
+  const spectrum = portal.match(/<section[^>]+id="spectrum-tools"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+  assert.equal([...spectrum.matchAll(/class="tool-card"/g)].length, 4);
+  assert.ok(spectrum.includes('href="https://cnt-xrd.47.236.76.214.nip.io/"'));
 });

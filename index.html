@@ -26,7 +26,7 @@
         <h1>一处入口，连接<br><em>从图像到工艺。</em></h1>
         <p class="lede">看清碳管结构，读懂材料数据。<br>连接图像分析、光谱表征、性质预测与生产研究。</p>
         <a class="vision-shortcut" href="vision/"><span class="shortcut-label">NEW</span> 碳管视觉问答 <span aria-hidden="true">↗</span></a>
-        <div class="intro-meta"><span><strong>10</strong> 工具与数据库</span><span><strong>4</strong> 研究任务分组</span></div>
+        <div class="intro-meta"><span><strong>11</strong> 工具与数据库</span><span><strong>4</strong> 研究任务分组</span></div>
       </div>
       <nav class="cnt-map" aria-label="CNT 研究工具快捷导航">
         <div class="map-ring ring-outer" aria-hidden="true"></div><div class="map-ring ring-inner" aria-hidden="true"></div>
@@ -38,7 +38,7 @@
         <span class="map-caption caption-image" aria-hidden="true">MICROGRAPH</span><span class="map-caption caption-structure" aria-hidden="true">STRUCTURE</span><span class="map-caption caption-property" aria-hidden="true">PROPERTY</span>
       </nav>
     </section>
-    <nav class="category-nav shell" aria-label="工具分类"><a href="#image-tools"><span>01</span> 图像与结构 <b>4 项</b></a><a href="#spectrum-tools"><span>02</span> 粒度与光谱 <b>3 项</b></a><a href="#process-tools"><span>03</span> 性质与生产 <b>2 项</b></a><a href="#simulation-tools"><span>04</span> 模拟数据库 <b>1 项</b></a></nav>
+    <nav class="category-nav shell" aria-label="工具分类"><a href="#image-tools"><span>01</span> 图像与结构 <b>4 项</b></a><a href="#spectrum-tools"><span>02</span> 粒度与光谱 <b>4 项</b></a><a href="#process-tools"><span>03</span> 性质与生产 <b>2 项</b></a><a href="#simulation-tools"><span>04</span> 模拟数据库 <b>1 项</b></a></nav>
     <div class="tools-section shell" id="tools" tabindex="-1">
       <div class="tools-intro"><p>按任务选择工作台</p><div class="tools-status"><div class="service-overview"><span id="serviceSummary" role="status">正在检查接口响应</span><button id="refreshServices" type="button">重新检查</button></div><p class="service-note">状态为本次浏览器探测结果，标注“待核验”多由跨域限制引起，不代表工具不可用。各工作台独立运行，数据不自动互通。</p></div></div>
       <section class="tool-group" id="image-tools" aria-labelledby="image-title">
@@ -62,7 +62,7 @@
       </section>
       <section class="tool-group" id="spectrum-tools" aria-labelledby="spectrum-title">
         <header class="group-heading"><div><p class="eyebrow">PARTICLE & SPECTRUM</p><h2 id="spectrum-title">粒度与光谱</h2></div><p>从分布与谱峰中提取材料信息。</p></header>
-        <div class="tool-grid">
+        <div class="tool-grid pair-grid">
           <article class="tool-card" data-service="grain">
             <div class="card-top"><span class="tool-index">05</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol grain-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="tool-type">PARTICLE SIZE DECONVOLUTION</p><h3>GrainPeak 粒度分峰</h3><p class="tool-description">粒度分布多峰拟合，输出峰参数、拟合优度和面积占比。</p><div class="tag-row"><span>多峰拟合</span><span>CSV 导出</span></div><a class="tool-link" href="https://grain-peak.47.236.76.214.nip.io/"><span>打开分峰台</span><b aria-hidden="true">↗</b></a>
           </article>
@@ -72,23 +72,31 @@
           <article class="tool-card" data-service="raman">
             <div class="card-top"><span class="tool-index">07</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol raman-symbol" aria-hidden="true"><i></i><i></i><i></i></div><p class="tool-type">RAMAN SPECTROSCOPY</p><h3>RamanFit Pro</h3><p class="tool-description">RBM、D 带与 G 带检测拟合，分析直径、候选手性及碳管类型。</p><div class="tag-row"><span>拉曼拟合</span><span>RBM 手性</span></div><a class="tool-link" href="https://raman.47.236.76.214.nip.io/"><span>打开拉曼台</span><b aria-hidden="true">↗</b></a>
           </article>
+          <article class="tool-card">
+            <div class="card-top"><span class="tool-index">08</span></div>
+            <div class="tool-symbol optical-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <p class="tool-type">X-RAY DIFFRACTION</p><h3>CNT-XRD 碳材料衍射分析</h3>
+            <p class="tool-description">批量拟合碳管衍射峰，估算层间距、表观晶畴尺寸与单壁管束管径。</p>
+            <div class="tag-row"><span>峰形拟合</span><span>CSV 导出</span></div>
+            <a class="tool-link" href="https://cnt-xrd.47.236.76.214.nip.io/"><span>打开 XRD 分析台</span><b aria-hidden="true">↗</b></a>
+          </article>
         </div>
       </section>
       <section class="tool-group" id="process-tools" aria-labelledby="process-title">
         <header class="group-heading"><div><p class="eyebrow">PROPERTY & PROCESS</p><h2 id="process-title">性质与生产</h2></div><p>连接材料表征与工艺决策。</p></header>
         <div class="tool-grid pair-grid">
           <article class="tool-card" data-service="bet">
-            <div class="card-top"><span class="tool-index">08</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol bet-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><p class="tool-type">PROPERTY PREDICTION</p><h3>CNT-BET 预测工作台</h3><p class="tool-description">BET、粉末电阻率与反向设计，支持 MWCNT / SWCNT 结构或工艺模型。</p><div class="tag-row"><span>性质预测</span><span>反向设计</span></div><a class="tool-link" href="https://47.236.76.214.nip.io/?v=20260814-paste"><span>打开预测台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">09</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol bet-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><p class="tool-type">PROPERTY PREDICTION</p><h3>CNT-BET 预测工作台</h3><p class="tool-description">BET、粉末电阻率与反向设计，支持 MWCNT / SWCNT 结构或工艺模型。</p><div class="tag-row"><span>性质预测</span><span>反向设计</span></div><a class="tool-link" href="https://47.236.76.214.nip.io/?v=20260814-paste"><span>打开预测台</span><b aria-hidden="true">↗</b></a>
           </article>
           <article class="tool-card" data-service="production">
-            <div class="card-top"><span class="tool-index">09</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol production-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><p class="tool-type">PRODUCTION INTELLIGENCE</p><h3>CNT 生产数据分析</h3><p class="tool-description">质量门禁、炉号排名、异常诊断与生产报表。使用时需要授权账号。</p><div class="tag-row"><span>授权访问</span><span>生产 KPI</span></div><a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/"><span>打开生产工作台</span><b aria-hidden="true">↗</b></a>
+            <div class="card-top"><span class="tool-index">10</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="tool-symbol production-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><p class="tool-type">PRODUCTION INTELLIGENCE</p><h3>CNT 生产数据分析</h3><p class="tool-description">质量门禁、炉号排名、异常诊断与生产报表。使用时需要授权账号。</p><div class="tag-row"><span>授权访问</span><span>生产 KPI</span></div><a class="tool-link" href="https://cnt-analysis.47.236.76.214.nip.io/"><span>打开生产工作台</span><b aria-hidden="true">↗</b></a>
           </article>
         </div>
       </section>
       <section class="tool-group" id="simulation-tools" aria-labelledby="simulation-title">
         <header class="group-heading"><div><p class="eyebrow">SIMULATION DATABASE</p><h2 id="simulation-title">模拟数据库</h2></div><p>归档计算证据，追溯每次仿真。</p></header>
         <article class="tool-card archive-card" data-service="furnace">
-          <div class="card-top"><span class="tool-index">10</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="archive-body"><div><p class="tool-type">SIMULATION DATA ARCHIVE</p><h3>仿真数据集归档</h3><p class="tool-description">工况组合、内部状态图、统计数据与完整性校验统一归档。当前收录 OC 炉管 CFD 参数扫描数据集。</p></div><a class="tool-link" href="https://sim-db.47.236.76.214.nip.io/"><span>打开归档数据库</span><b aria-hidden="true">↗</b></a></div>
+          <div class="card-top"><span class="tool-index">11</span><span class="status-pill checking"><i></i><b>检查中</b></span></div><div class="archive-body"><div><p class="tool-type">SIMULATION DATA ARCHIVE</p><h3>仿真数据集归档</h3><p class="tool-description">工况组合、内部状态图、统计数据与完整性校验统一归档。当前收录 OC 炉管 CFD 参数扫描数据集。</p></div><a class="tool-link" href="https://sim-db.47.236.76.214.nip.io/"><span>打开归档数据库</span><b aria-hidden="true">↗</b></a></div>
         </article>
       </section>
     </div>
