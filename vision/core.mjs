@@ -60,6 +60,7 @@ export function detectImageType(bytes) {
 
 export function buildRequest({ image, imageType, scale, history, question }) {
   if (!image?.dataUrl || !question.trim()) throw new Error("请先选择图像并填写问题。");
+  if (history.length > 62) throw new Error("本次对话已达 32 轮，请清空对话后继续。");
   const calibration = scale
     ? `用户标定：原图 ${scale.pixels} px = ${scale.length} ${scale.unit}；每像素 ${scale.perPixel} ${scale.unit}。`
     : "用户未提供像素标定。若图中标尺无法可靠辨认，请勿报告绝对尺寸。";
@@ -86,16 +87,48 @@ export function apiError(status) {
   return `请求失败（HTTP ${status}），请检查连接后重试。`;
 }
 
-export async function requestAnswer({ payload, signal, fetchImpl = fetch }) {
+export async function requestAnswer({ payload, signal, fetchImpl = fetch, onText, imageToken }) {
+  let body = payload;
+  if (imageToken) {
+    const [first, ...rest] = payload.messages;
+    body = { image_token: imageToken, messages: [{ ...first, content: first.content.map(part =>
+      part.type === "image_url" ? { type: "image_url", image_url: {} } : part) }, ...rest] };
+  }
   const response = await fetchImpl(API_URL, {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload), signal, credentials: "omit", redirect: "error",
+    method: "POST", headers: { "Content-Type": "application/json", Accept: onText ? "text/event-stream" : "application/json" },
+    body: JSON.stringify(body), signal, credentials: "omit", redirect: "error",
   });
+  if (response.status === 410 && imageToken) return requestAnswer({ payload, signal, fetchImpl, onText });
   if (!response.ok) {
     const errors = { daily_limit: "今日共享调用次数已用完，请明天再试。", rate_limit: "请求过于频繁，请稍后再试。", busy: "当前分析任务较多，请稍后再试。", invalid_request: "图像或对话超出服务限制，请检查图像或清空长对话后重试。", unavailable: "视觉服务尚未配置完成，请联系管理员。" };
     let code;
     try { code = (await response.json()).code; } catch { /* Use the status-only message. */ }
     throw new Error(errors[code] || apiError(response.status));
+  }
+  if (response.headers?.get("Content-Type")?.startsWith("text/event-stream")) {
+    const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+    let buffer = "", content = "";
+    try {
+      while (true) {
+        const part = await reader.read();
+        if (part.done) throw new Error("回答连接中断，请重试。");
+        buffer += part.value;
+        let end;
+        while ((end = buffer.indexOf("\n\n")) >= 0) {
+          const frame = buffer.slice(0, end);
+          buffer = buffer.slice(end + 2);
+          if (!frame.startsWith("data: ")) continue;
+          const event = JSON.parse(frame.slice(6));
+          if (event.error) throw new Error("回答连接中断，请重试。");
+          if (event.done) {
+            if (!content.trim()) throw new Error("模型未返回有效回答。");
+            return { content, truncated: event.truncated, imageToken: response.headers.get("X-Image-Token") };
+          }
+          content += event.content || "";
+          onText?.(content);
+        }
+      }
+    } finally { await reader.cancel().catch(() => {}); }
   }
   let data;
   try { data = await response.json(); } catch { throw new Error("模型返回的内容无法读取，请重试。"); }

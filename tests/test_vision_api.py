@@ -1,5 +1,6 @@
 import base64
 import os
+from io import BytesIO
 import tempfile
 import unittest
 import urllib.error
@@ -63,6 +64,26 @@ class GatewayTests(unittest.TestCase):
         override = payload(); override["model"] = "another-model"
         self.assertEqual(normalize_payload(override)["model"], "deepseek-flash")
         self.assertEqual(len(self.calls), 0)
+
+    def test_streamed_followup_reuses_image_and_releases_slots(self):
+        sent = []
+        def stream(data, _key):
+            sent.append(data)
+            return BytesIO(b'data: {"choices":[{"delta":{"content":"ok"},"finish_reason":"stop"}]}\n\ndata: [DONE]\n\n')
+        client = create_app(self.key_file, self.directory / "stream", open_stream=stream).test_client()
+        headers = {**ORIGIN, "Accept": "text/event-stream"}
+        with client.post("/api/chat", json=payload(), headers=headers) as response:
+            self.assertIn('"done": true', response.get_data(as_text=True))
+            token = response.headers["X-Image-Token"]
+        followup = payload()
+        followup["image_token"] = token
+        followup["messages"][0]["content"][1]["image_url"] = {}
+        with client.post("/api/chat", json=followup, headers=headers) as response:
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('"content": "ok"', response.get_data(as_text=True))
+        self.assertEqual(sent[0]["messages"][1], sent[1]["messages"][1])
+        self.assertTrue(sent[0]["stream"])
+        self.assertEqual(client.post("/api/chat", json=followup, headers={**headers, "X-Real-IP":"192.0.2.1"}).status_code, 410)
 
     def test_rate_limit_is_enforced(self):
         client = self.app().test_client()

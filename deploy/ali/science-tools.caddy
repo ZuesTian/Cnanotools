@@ -1,9 +1,18 @@
+(portal_static_health) {
+	@health path /health
+	header @health {
+		Access-Control-Allow-Origin https://zuestian.github.io
+		Content-Type application/json
+		Cache-Control no-store
+	}
+}
+
 grain-peak.47.236.76.214.nip.io {
 	encode zstd gzip
 	@document path /
 	header @document Cache-Control "no-cache"
-	@versionedAssets path_regexp versionedAssets \.(css|js)$
-	header @versionedAssets Cache-Control "public, max-age=31536000, immutable"
+	@assets path *.css *.js *.mjs
+	header @assets Cache-Control "no-cache"
 	request_body {
 		max_size 15MB
 	}
@@ -19,8 +28,9 @@ uv-spectrum.47.236.76.214.nip.io {
 	encode zstd gzip
 	@document path /
 	header @document Cache-Control "no-cache"
-	@versionedAssets path_regexp versionedAssets \.(css|js)$
-	header @versionedAssets Cache-Control "public, max-age=31536000, immutable"
+	@assets path *.css *.js *.mjs
+	header @assets Cache-Control "no-cache"
+	import portal_static_health
 	root * /opt/uv-spectrum/current/web
 	file_server
 	header {
@@ -34,8 +44,8 @@ raman.47.236.76.214.nip.io {
 	encode zstd gzip
 	@document path /
 	header @document Cache-Control "no-cache"
-	@versionedAssets path_regexp versionedAssets \.(css|js)$
-	header @versionedAssets Cache-Control "public, max-age=31536000, immutable"
+	@assets path *.css *.js *.mjs
+	header @assets Cache-Control "no-cache"
 	request_body {
 		max_size 26MB
 	}
@@ -44,5 +54,35 @@ raman.47.236.76.214.nip.io {
 		X-Content-Type-Options nosniff
 		Referrer-Policy strict-origin-when-cross-origin
 		X-Frame-Options SAMEORIGIN
+	}
+}
+
+cnt-xrd.47.236.76.214.nip.io {
+	encode zstd gzip
+	import portal_static_health
+	root * {$CNT_XRD_ROOT:/var/www/cnt-xrd}
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Frame-Options SAMEORIGIN
+	}
+	@private not path / /CNT-XRD.html /health
+	respond @private 404
+	file_server {
+		index CNT-XRD.html
+	}
+}
+
+sim-db.47.236.76.214.nip.io {
+	encode zstd gzip
+	import portal_static_health
+	root * {$SIM_DB_ROOT:/var/www/sim-db}
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Frame-Options SAMEORIGIN
+	}
+	file_server {
+		index index.html
 	}
 }

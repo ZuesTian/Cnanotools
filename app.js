@@ -1,16 +1,17 @@
 "use strict";
 
 const services = {
-  vision: "https://cnt-vision.47.236.76.214.nip.io/api/health",
-  opt: "https://opt-cnt.47.236.76.214.nip.io/api/v1/health",
-  tem: "https://tem-cnt.47.236.76.214.nip.io/api/health",
-  sem: "https://sem.47.236.76.214.nip.io/api/v1/health",
-  grain: "https://grain-peak.47.236.76.214.nip.io/api/health",
+  vision: "https://cnt-vision.47.236.76.214.nip.io/health",
+  opt: "https://opt-cnt.47.236.76.214.nip.io/health",
+  tem: "https://tem-cnt.47.236.76.214.nip.io/health",
+  sem: "https://sem.47.236.76.214.nip.io/health",
+  grain: "https://grain-peak.47.236.76.214.nip.io/health",
   uv: "https://uv-spectrum.47.236.76.214.nip.io/health",
-  raman: "https://raman.47.236.76.214.nip.io/api/health",
-  bet: "https://47.236.76.214.nip.io/api/config",
-  production: "https://cnt-analysis.47.236.76.214.nip.io/api/v1/health",
-  furnace: "https://sim-db.47.236.76.214.nip.io/",
+  raman: "https://raman.47.236.76.214.nip.io/health",
+  xrd: "https://cnt-xrd.47.236.76.214.nip.io/health",
+  bet: "https://47.236.76.214.nip.io/health",
+  production: "https://cnt-analysis.47.236.76.214.nip.io/health",
+  furnace: "https://sim-db.47.236.76.214.nip.io/health",
 };
 
 async function probe(url) {
@@ -18,7 +19,10 @@ async function probe(url) {
   const timer = window.setTimeout(() => controller.abort(), 7000);
   try {
     const response = await fetch(url, { mode: "cors", cache: "no-store", signal: controller.signal });
-    return response.ok ? "online" : "offline";
+    if (!response.ok) return "offline";
+    if (!response.headers.get("content-type")?.includes("application/json")) return "offline";
+    const health = await response.json().catch(() => null);
+    return health && typeof health === "object" && !Array.isArray(health) ? "online" : "offline";
   } catch {
     // A CORS-blocked response is not evidence that a service is offline.
     return "unknown";
@@ -45,3 +49,13 @@ async function checkServices() {
 
 document.getElementById("refreshServices").addEventListener("click", checkServices);
 checkServices();
+
+document.getElementById("tool-mode").addEventListener("change", event => {
+  const mode = event.target.value;
+  for (const card of document.querySelectorAll("[data-service]")) {
+    card.hidden = Boolean(mode && mode !== card.dataset.mode);
+  }
+  for (const section of document.querySelectorAll("section:has([data-service])")) {
+    section.hidden = !section.querySelector("[data-service]:not([hidden])");
+  }
+});

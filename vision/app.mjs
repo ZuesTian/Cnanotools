@@ -1,5 +1,5 @@
-import { MAX_BYTES, QUESTIONS, getScale, scaleMatches, measurePixelDistance, detectImageType, buildRequest, requestAnswer } from "./core.mjs?v=20260911-neutral";
-import { ImageViewer } from "./viewer.mjs?v=20260911-neutral";
+import { MAX_BYTES, QUESTIONS, getScale, scaleMatches, measurePixelDistance, detectImageType, buildRequest, requestAnswer } from "./core.mjs?v=20261125";
+import { ImageViewer } from "./viewer.mjs?v=20261125";
 
 const $ = (id) => document.getElementById(id);
 let image = null;
@@ -276,7 +276,10 @@ $("questionForm").addEventListener("submit", async (event) => {
   const timeout = setTimeout(() => { timedOut = true; controller.abort(); }, 120000);
   sync();
   try {
-    const answer = await requestAnswer({ payload, signal: controller.signal });
+    const answer = await requestAnswer({ payload, signal: controller.signal, imageToken: image.token,
+      onText: text => { pending.querySelector(".message-body").textContent = text; },
+    });
+    image.token = answer.imageToken;
     if (controller.signal.aborted) throw new DOMException("Aborted", "AbortError");
     pending.remove();
     appendMessage("assistant", answer.content);

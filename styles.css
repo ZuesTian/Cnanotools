@@ -156,3 +156,11 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--teal); outline-
   .tool-card.vision-feature { grid-template-columns: 1fr; }.vision-feature .vision-symbol { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+[hidden] { display:none !important }
+.tool-filter {display:flex;align-items:center;gap:12px;margin:22px auto;color:var(--ink)}
+.tool-filter select {padding:6px 12px;min-height:44px;background:var(--surface);color:inherit;border:1px solid var(--line);border-radius:6px}
+.xrd-symbol {display:flex;align-items:flex-end;justify-content:center;gap:3px;background:#e1efe9;color:#167161}
+.xrd-symbol i {width:6px;height:12px;background:currentColor;clip-path:polygon(65% 0,100% 100%,0 100%)}
+.xrd-symbol i:nth-child(2) {height:30px}
+.xrd-symbol i:nth-child(3) {height:18px}

@@ -122,3 +122,8 @@ body {
 :root[data-theme="dark"] .bet-symbol span { background: #e0b463; }
 :root[data-theme="dark"] .production-symbol { background: #222c34; }
 :root[data-theme="dark"] .production-symbol i { background: #8fa8bd; }
+
+[data-theme-toggle],a[href="https://zuestian.github.io/Cnanotools/"]{min-height:44px;min-width:44px}
+@media(min-width:341px){[data-theme-toggle] [data-theme-label]{display:inline}}
+
+:root[data-theme="dark"] .xrd-symbol {background:#153631;color:#86ddca}

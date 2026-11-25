@@ -1,6 +1,6 @@
 # Cnanotools
 
-碳纳米管科学分析工具的统一入口，按分析任务连接各个工作台。本仓库维护导航页、共享页面样式和 OptCNT 浏览器快速分析前端。
+碳纳米管科学分析工具的统一入口，按分析任务连接各个工作台。本仓库维护导航页、共享页面样式和视觉问答前端。
 
 **[打开在线工具入口](https://zuestian.github.io/Cnanotools/)**
 
@@ -20,11 +20,7 @@
 | 性质与生产 | CNT 生产数据分析 | [打开](https://cnt-analysis.47.236.76.214.nip.io/) | [cnt-production-analysis](https://github.com/ZuesTian/cnt-production-analysis) |
 | 模拟数据 | 仿真数据集归档 | [打开](https://sim-db.47.236.76.214.nip.io/) | — |
 
-## OptCNT 浏览器快速分析
-
-[打开浏览器版](https://zuestian.github.io/Cnanotools/optcnt/)。
-
-这一版本在浏览器内存中处理 OptCNT 原图。桌面和独立 Web 版本的开发说明见 [OptCNT 仓库](https://github.com/ZuesTian/OptCNT)。
+旧版 optcnt/ 入口自动跳转到独立的 OptCNT 光学分析台。
 
 ## 本地预览
 
@@ -34,7 +30,7 @@
 python -m http.server 8080
 ```
 
-打开 `http://127.0.0.1:8080/` 查看导航页，或打开 `http://127.0.0.1:8080/optcnt/` 进入浏览器快速分析。
+打开 `http://127.0.0.1:8080/` 查看导航页。
 
 ## 目录
 
@@ -42,7 +38,7 @@ python -m http.server 8080
 | --- | --- |
 | `index.html`, `app.js`, `styles.css` | 工具导航页 |
 | `theme.css`, `theme.js` | 页面主题 |
-| `optcnt/` | OptCNT 浏览器快速分析 |
+| `optcnt/` | 旧地址跳转 |
 | `assets/` | 页面图片与资源 |
 | `deploy/` | 部署配置 |
 | `.github/` | GitHub Pages 发布流程 |
@@ -65,3 +61,13 @@ python -m http.server 8080
 - 前端采用原生 ES modules，无新增依赖。可用 `python -m http.server 8789 --bind 127.0.0.1` 预览（不要直接使用 file://）。前端测试：`node --test`；网关测试：`python -m unittest discover -s tests -p test_vision_api.py -v`。
 - 网关位于 `server/vision_api.py`，部署配置位于 `deploy/ali/cnt-vision.*` 与 `install-vision.sh`，复用服务器现有 Flask/Gunicorn 运行环境。服务监听 `127.0.0.1:8780`，经独立 Caddy 域名提供 HTTPS。Pages 发布只打包明确列出的前端目录，不发布服务端、测试或部署文件。
 - 此页面提供视觉理解和尺寸估算，不运行逐根分割或统计算法。需要计量结果时使用门户中已有的 TEM / SEM 工具。
+
+视觉问答使用 SSE 逐段显示回答。网关最多在进程内保留三张近期图像，令牌绑定客户端和来源，十分钟后失效。后续提问复用图像，缓存失效时重新上传，服务器仍按每次提问调用上游。
+
+### 本地验证与部署文件
+
+门户的 11 个探测均请求各工具既有域名的 `/health`。返回 2xx 表示该接口可达。UV、XRD 和仿真归档的探测读取静态 JSON；其余探测访问服务端。浏览器需要响应头 `Access-Control-Allow-Origin: https://zuestian.github.io`。
+
+`deploy/ali/science-tools.caddy` 负责 GrainPeak、UV、Raman、XRD 和仿真归档。XRD 文档根需同时包含 `CNT-XRD.html` 与 `health`；仿真归档需把 `public/` 的内容与原有归档子目录放在同一文档根。可通过 Caddy 服务环境变量 `CNT_XRD_ROOT`、`SIM_DB_ROOT` 指向现有静态目录。接入已有站点时，应先合并同域名配置，整个 Caddy 配置中每个域名只定义一次。
+
+TEM、SEM、BET 仓库的 `deploy/portal-health.caddy` 片段应导入各自现有站点块，使探测转发给真实上游。生产分析、OptCNT、视觉问答使用各自服务配置。部署前用 `caddy validate` 校验合并后的完整配置。
