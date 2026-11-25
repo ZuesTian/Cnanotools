@@ -146,6 +146,7 @@ async function loadImage(file) {
     if (!decoded.naturalWidth || !decoded.naturalHeight || Math.max(decoded.naturalWidth, decoded.naturalHeight) > 8192) {
       throw new Error("图像每边必须在 1–8192 px 之间，请调整图像尺寸后重试。");
     }
+    document.dispatchEvent(new Event("cnt-data-imported"));
     image = { dataUrl, width: decoded.naturalWidth, height: decoded.naturalHeight };
     viewer.setImage(decoded);
     $("uploadEmpty").hidden = true;

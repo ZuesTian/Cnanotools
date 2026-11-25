@@ -8,7 +8,13 @@ cnt-vision.47.236.76.214.nip.io {
 		Referrer-Policy no-referrer
 		X-Frame-Options DENY
 	}
-	reverse_proxy 127.0.0.1:8780 {
-		header_up X-Real-IP {remote_host}
+	@usage path /api/usage/daily /api/usage/record
+	handle @usage {
+		reverse_proxy 127.0.0.1:8782
+	}
+	handle {
+		reverse_proxy 127.0.0.1:8780 {
+			header_up X-Real-IP {remote_host}
+		}
 	}
 }

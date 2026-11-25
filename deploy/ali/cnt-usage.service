@@ -1,0 +1,20 @@
+[Unit]
+Description=CNT workbench daily usage counts
+After=network.target
+
+[Service]
+DynamicUser=yes
+User=cntusage
+StateDirectory=cnt-usage
+StateDirectoryMode=0700
+WorkingDirectory=/opt/cnt-usage/current
+ExecStart=/opt/science-tools/.venv/bin/gunicorn usage_api:create_app() --bind 127.0.0.1:8782 --workers 1 --threads 4 --timeout 15
+Environment=PYTHONDONTWRITEBYTECODE=1
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

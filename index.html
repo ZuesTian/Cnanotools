@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="theme.css?v=20261125" />
   <link rel="stylesheet" href="styles.css?v=20261125" />
   <script src="app.js?v=20261125" defer></script>
+  <script src="usage-log.js?v=20261125-usage1" defer></script>
 </head>
 <body class="portal">
   <a class="skip-link" href="#tools">跳到工具列表</a>
@@ -41,7 +42,7 @@
     <nav class="category-nav shell" aria-label="工具分类"><a href="#image-tools"><span>01</span> 图像与结构 <b>4 项</b></a><a href="#spectrum-tools"><span>02</span> 粒度与光谱 <b>4 项</b></a><a href="#process-tools"><span>03</span> 性质与生产 <b>2 项</b></a><a href="#simulation-tools"><span>04</span> 模拟数据库 <b>1 项</b></a></nav>
     <div class="tools-section shell" id="tools" tabindex="-1">
       <div class="tools-intro"><p>按任务选择工作台</p><div class="tools-status"><div class="service-overview"><span id="serviceSummary" role="status">正在检查接口响应</span><button id="refreshServices" type="button">重新检查</button></div><p class="service-note">状态为本次浏览器探测结果，标注“待核验”多由跨域限制引起，不代表工具不可用。各工作台独立运行，数据不自动互通。</p></div></div>
-      <label class="tool-filter shell">按运行方式筛选 <select id="tool-mode"><option value="">全部工具</option><option>浏览器计算</option><option>云端分析</option><option>授权访问</option><option>只读归档</option></select></label>
+      <div class="tool-controls"><label class="tool-filter">按运行方式筛选 <select id="tool-mode"><option value="">全部工具</option><option>浏览器计算</option><option>云端分析</option><option>授权访问</option><option>只读归档</option></select></label><a class="usage-jump" href="#usage">查看使用日志 ↓</a></div>
     <section class="tool-group" id="image-tools" aria-labelledby="image-title">
         <header class="group-heading"><div><p class="eyebrow">IMAGE & STRUCTURE</p><h2 id="image-title">图像与结构</h2></div><p>先观察分布，再测量尺寸。</p></header>
         <article class="tool-card vision-feature" data-service="vision" data-mode="云端分析">
@@ -101,6 +102,13 @@
         </article>
       </section>
     </div>
+    <section id="usage" class="usage-log shell" aria-labelledby="usage-title">
+      <header><div><h2 id="usage-title">工具使用日志</h2><p>按北京时间统计。导入、分析、导出或检索等操作计入使用，同一工具每天按浏览器去重。</p></div>
+        <div class="usage-controls"><label>统计日期 <input type="date" aria-label="统计日期"></label><button type="button">刷新</button></div>
+      </header>
+      <table><thead><tr><th scope="col">工具</th><th scope="col">使用人数</th></tr></thead><tbody></tbody></table>
+      <p role="status" aria-live="polite"></p>
+    </section>
   </main>
   <footer class="site-footer shell"><div><strong>CNT LAB</strong><span>碳管科学工具</span></div><p>保留原始数据，让每个结论都有依据。</p><a href="#top">回到顶部 ↑</a></footer>
 </body>

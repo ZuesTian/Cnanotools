@@ -22,7 +22,8 @@ test("calibration draft/apply/cancel/clear flow never submits unconfirmed values
   const html = readFileSync(new URL("../vision/index.html", import.meta.url), "utf8");
   const nodes = new Map([...html.matchAll(/\bid="([^"]+)"/g)].map((match) => [match[1], new Element()]));
   const $ = (id) => nodes.get(id);
-  globalThis.document = { getElementById: $, querySelectorAll: () => [], addEventListener() {}, createElement: () => new Element() };
+  const imported = [];
+  globalThis.document = { dispatchEvent(event) { imported.push(event.type); }, getElementById: $, querySelectorAll: () => [], addEventListener() {}, createElement: () => new Element() };
   globalThis.window = { devicePixelRatio: 1, addEventListener() {} };
   globalThis.ResizeObserver = class { observe() {} };
   globalThis.Image = class { naturalWidth = 1024; naturalHeight = 768; decode() { return Promise.resolve(); } };
@@ -35,6 +36,7 @@ test("calibration draft/apply/cancel/clear flow never submits unconfirmed values
   await import("../vision/app.mjs");
   const file = new Blob([Uint8Array.from([137,80,78,71,13,10,26,10])]);
   await $("imageFile").fire("change", { target: { files: [file] } });
+  assert.deepEqual(imported, ["cnt-data-imported"]);
   const input = (id, value) => { $(id).value = value; $(id).fire("input"); };
   input("question", "请估算长度");
   input("scalePixels", "200"); input("scaleLength", "10");

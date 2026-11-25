@@ -71,3 +71,11 @@ python -m http.server 8080
 `deploy/ali/science-tools.caddy` 负责 GrainPeak、UV、Raman、XRD 和仿真归档。XRD 文档根需同时包含 `CNT-XRD.html` 与 `health`；仿真目录页发布 `public/` 的内容。原有炉管报告由独立的 `SIM_DB_ARCHIVE_ROOT` 提供，默认使用生产机已有的 `/opt/cnt-bet/public`。可通过 Caddy 服务环境变量 `CNT_XRD_ROOT`、`SIM_DB_ROOT` 指向现有静态目录。接入已有站点时，应先合并同域名配置，整个 Caddy 配置中每个域名只定义一次。
 
 TEM、SEM、BET 仓库的 `deploy/portal-health.caddy` 片段应导入各自现有站点块，使探测转发给真实上游。生产分析、OptCNT、视觉问答使用各自服务配置。部署前用 `caddy validate` 校验合并后的完整配置。
+
+## 公开使用日志
+
+门户的「使用日志」按北京时间查询各工具每日的使用浏览器数。触发条件是主动导入、发起分析、导出、检索或打开数据集等业务操作。浏览器为每个工具按日生成随机编号，同一日期与工具的重复请求在 SQLite 事务内只累加一次。请求只发送工具、日期和随机编号。数据库按日保存汇总数，收到新一天的使用事件时清除旧日去重键。
+
+在线统计服务位于 `server/usage_api.py`。生产机使用 `cnt-usage.service` 和 `/var/lib/cnt-usage/daily.sqlite3`，状态目录随发布保留。门户读取 `GET /api/usage/daily?date=YYYY-MM-DD`。TEM 与生产分析通过同源代理写入；其他工具使用视觉网关域名的统计路由。统计起始时间随数据库持久保存，首次上线以前的记录不回填。
+
+维护业务操作选择器时编辑 `usage-client.js`，再运行 `tools/sync_workbench_assets.py`。XRD 的单文件离线打开时不会上报。

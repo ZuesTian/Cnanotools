@@ -12,6 +12,8 @@ spectra = ["GrainPeak/web", "Peakfit-CntRaman/web", "UV/web"]
 themes = spectra + ["OptCNT/web", "cnt-bet-workbench", "sim-db/public",
                     "tem-cnt-workbench/static/js", "sem-cnt/frontend/static/js", "cnt-xrd/src"]
 pairs = [(portal / "theme.js", workspace / root / "theme.js") for root in themes]
+pairs.extend((portal / "usage-client.js", workspace / root / "usage-client.js")
+             for root in [*themes, "cnt-production-analysis/web_app/frontend/public"])
 pairs.extend((portal / "shared/spectrum-theme.css", workspace / root / "spectrum-theme.css") for root in spectra)
 pairs.extend((p, workspace / "sem-cnt/frontend/static/css" / p.name)
              for p in (workspace / "tem-cnt-workbench/static/css").glob("*.css"))
