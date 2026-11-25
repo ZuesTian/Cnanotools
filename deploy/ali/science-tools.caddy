@@ -60,13 +60,14 @@ raman.47.236.76.214.nip.io {
 cnt-xrd.47.236.76.214.nip.io {
 	encode zstd gzip
 	import portal_static_health
-	root * {$CNT_XRD_ROOT:/var/www/cnt-xrd}
+	root * {$CNT_XRD_ROOT:/opt/cnt-xrd/current}
 	header {
 		X-Content-Type-Options nosniff
 		Referrer-Policy strict-origin-when-cross-origin
 		X-Frame-Options SAMEORIGIN
 	}
-	@private not path / /CNT-XRD.html /health
+	@private not path / /index.html /CNT-XRD.html /health
+	rewrite /index.html /CNT-XRD.html
 	respond @private 404
 	file_server {
 		index CNT-XRD.html
@@ -76,13 +77,18 @@ cnt-xrd.47.236.76.214.nip.io {
 sim-db.47.236.76.214.nip.io {
 	encode zstd gzip
 	import portal_static_health
-	root * {$SIM_DB_ROOT:/var/www/sim-db}
+	root * {$SIM_DB_ROOT:/opt/sim-db/current}
 	header {
 		X-Content-Type-Options nosniff
 		Referrer-Policy strict-origin-when-cross-origin
 		X-Frame-Options SAMEORIGIN
 	}
-	file_server {
-		index index.html
+	@archive path /oc-furnace-report-plain-v6/*
+	handle @archive {
+		root * {$SIM_DB_ARCHIVE_ROOT:/opt/cnt-bet/public}
+		file_server
+	}
+	handle {
+		file_server
 	}
 }

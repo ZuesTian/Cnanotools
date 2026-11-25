@@ -68,6 +68,6 @@ python -m http.server 8080
 
 门户的 11 个探测均请求各工具既有域名的 `/health`。返回 2xx 表示该接口可达。UV、XRD 和仿真归档的探测读取静态 JSON；其余探测访问服务端。浏览器需要响应头 `Access-Control-Allow-Origin: https://zuestian.github.io`。
 
-`deploy/ali/science-tools.caddy` 负责 GrainPeak、UV、Raman、XRD 和仿真归档。XRD 文档根需同时包含 `CNT-XRD.html` 与 `health`；仿真归档需把 `public/` 的内容与原有归档子目录放在同一文档根。可通过 Caddy 服务环境变量 `CNT_XRD_ROOT`、`SIM_DB_ROOT` 指向现有静态目录。接入已有站点时，应先合并同域名配置，整个 Caddy 配置中每个域名只定义一次。
+`deploy/ali/science-tools.caddy` 负责 GrainPeak、UV、Raman、XRD 和仿真归档。XRD 文档根需同时包含 `CNT-XRD.html` 与 `health`；仿真目录页发布 `public/` 的内容。原有炉管报告由独立的 `SIM_DB_ARCHIVE_ROOT` 提供，默认使用生产机已有的 `/opt/cnt-bet/public`。可通过 Caddy 服务环境变量 `CNT_XRD_ROOT`、`SIM_DB_ROOT` 指向现有静态目录。接入已有站点时，应先合并同域名配置，整个 Caddy 配置中每个域名只定义一次。
 
 TEM、SEM、BET 仓库的 `deploy/portal-health.caddy` 片段应导入各自现有站点块，使探测转发给真实上游。生产分析、OptCNT、视觉问答使用各自服务配置。部署前用 `caddy validate` 校验合并后的完整配置。
